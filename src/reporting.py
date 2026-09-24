@@ -61,12 +61,31 @@ def numeric_correlations(df: pd.DataFrame, target: str) -> pd.DataFrame:
 
 
 def categorical_price_summary(df: pd.DataFrame, target: str, max_levels: int = 15) -> pd.DataFrame:
+    """Summarize nominal and binary categories against price.
+
+    Binary indicators are included because assignment Q6 explicitly asks how
+    characteristics such as accident/damage history affect average/median price.
+    """
     tables = []
-    categorical = [c for c in df.columns if (pd.api.types.is_string_dtype(df[c]) or df[c].dtype == "object") and c != target]
-    for col in categorical:
-        top = df[col].fillna("unknown").value_counts().head(max_levels).index
+    candidates = []
+    for col in df.columns:
+        if col == target:
+            continue
+        is_text = pd.api.types.is_string_dtype(df[col]) or df[col].dtype == "object"
+        non_null = df[col].dropna()
+        is_binary = (
+            pd.api.types.is_numeric_dtype(df[col])
+            and not non_null.empty
+            and set(non_null.unique()).issubset({0, 1})
+        )
+        if is_text or is_binary:
+            candidates.append(col)
+
+    for col in candidates:
+        series = df[col].fillna("unknown")
+        top = series.value_counts().head(max_levels).index
         part = (
-            df.assign(_category=df[col].fillna("unknown"))
+            df.assign(_category=series)
             .loc[lambda x: x["_category"].isin(top)]
             .groupby("_category", dropna=False)[target]
             .agg(count="size", mean_price="mean", median_price="median")
@@ -125,21 +144,41 @@ def depreciation_table(df: pd.DataFrame, target: str) -> pd.DataFrame:
     return temp.groupby("age_band", observed=True)[target].agg(listings="size", mean_price="mean", median_price="median").reset_index()
 
 
-def segment_retention_table(df: pd.DataFrame, target: str) -> pd.DataFrame:
-    segment = next((c for c in ["brand", "fuel_type", "drivetrain"] if c in df.columns), None)
-    if segment is None or "vehicle_age" not in df.columns:
-        return pd.DataFrame({"note": ["Skipped: no supported segment and vehicle_age combination is available."]})
-    temp = df.dropna(subset=[segment, "vehicle_age", target]).copy()
-    counts = temp[segment].value_counts()
-    keep = counts[counts >= 100].index
-    temp = temp[temp[segment].isin(keep)]
+def segment_retention_table(
+    df: pd.DataFrame,
+    target: str,
+    segment_features: tuple[str, ...] = ("brand", "model", "fuel_type", "drivetrain"),
+    min_listings: int = 100,
+) -> pd.DataFrame:
+    """Estimate age-related value retention across every supported segment type."""
+    if "vehicle_age" not in df.columns:
+        return pd.DataFrame({"note": ["Skipped: vehicle_age is unavailable."]})
+
     rows = []
-    for value, group in temp.groupby(segment):
-        if group["vehicle_age"].nunique() < 2:
-            continue
-        slope = np.polyfit(group["vehicle_age"], np.log1p(group[target]), 1)[0]
-        rows.append({"segment_feature": segment, "segment": value, "listings": len(group), "annual_log_price_slope": slope, "approx_annual_pct_change": np.expm1(slope) * 100})
-    return pd.DataFrame(rows).sort_values("approx_annual_pct_change", ascending=False)
+    for segment in [c for c in segment_features if c in df.columns]:
+        temp = df.dropna(subset=[segment, "vehicle_age", target]).copy()
+        counts = temp[segment].value_counts()
+        keep = counts[counts >= min_listings].index
+        temp = temp[temp[segment].isin(keep)]
+        for value, group in temp.groupby(segment):
+            if group["vehicle_age"].nunique() < 2:
+                continue
+            slope = np.polyfit(group["vehicle_age"], np.log1p(group[target]), 1)[0]
+            rows.append(
+                {
+                    "segment_feature": segment,
+                    "segment": value,
+                    "listings": len(group),
+                    "annual_log_price_slope": slope,
+                    "approx_annual_pct_change": np.expm1(slope) * 100,
+                }
+            )
+    if not rows:
+        return pd.DataFrame({"note": ["No supported segments met the minimum-listing threshold."]})
+    return pd.DataFrame(rows).sort_values(
+        ["segment_feature", "approx_annual_pct_change"],
+        ascending=[True, False],
+    ).reset_index(drop=True)
 
 
 def pricing_opportunities(test_df: pd.DataFrame, target: str, predictions: np.ndarray) -> pd.DataFrame:
