@@ -11,7 +11,7 @@ from sklearn.base import clone
 from sklearn.compose import ColumnTransformer
 from sklearn.impute import SimpleImputer
 from sklearn.linear_model import Lasso, LinearRegression, Ridge
-from sklearn.metrics import mean_absolute_error, mean_squared_error, r2_score
+from sklearn.metrics import make_scorer, mean_absolute_error, mean_squared_error, r2_score
 from sklearn.model_selection import GridSearchCV, KFold
 from sklearn.pipeline import Pipeline
 from sklearn.preprocessing import OneHotEncoder, StandardScaler
@@ -66,6 +66,19 @@ def make_pipeline(preprocessor: ColumnTransformer, model: Any) -> Pipeline:
     return Pipeline([("preprocessor", clone(preprocessor)), ("model", model)])
 
 
+def _original_price_rmse_from_log(y_true_log: np.ndarray, y_pred_log: np.ndarray) -> float:
+    """RMSE in original price units when model target is log1p(price)."""
+    y_true = np.expm1(np.asarray(y_true_log))
+    y_pred = np.maximum(0.0, np.expm1(np.asarray(y_pred_log)))
+    return float(np.sqrt(mean_squared_error(y_true, y_pred)))
+
+
+ORIGINAL_PRICE_RMSE_SCORER = make_scorer(
+    _original_price_rmse_from_log,
+    greater_is_better=False,
+)
+
+
 def tune_model(
     pipeline: Pipeline,
     X: pd.DataFrame,
@@ -77,7 +90,7 @@ def tune_model(
     search = GridSearchCV(
         pipeline,
         {"model__alpha": list(alphas)},
-        scoring="neg_root_mean_squared_error",
+        scoring=ORIGINAL_PRICE_RMSE_SCORER,
         cv=cv,
         n_jobs=n_jobs,
         refit=True,
@@ -87,7 +100,7 @@ def tune_model(
     table = pd.DataFrame(search.cv_results_)[
         ["param_model__alpha", "mean_train_score", "mean_test_score", "std_test_score", "rank_test_score"]
     ].copy()
-    table.columns = ["alpha", "mean_train_neg_rmse_log", "mean_cv_neg_rmse_log", "cv_std_log", "rank"]
+    table.columns = ["alpha", "mean_train_neg_rmse_price", "mean_cv_neg_rmse_price", "cv_std_price", "rank"]
     return search.best_estimator_, table.sort_values("rank")
 
 
