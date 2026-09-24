@@ -245,7 +245,7 @@ def write_summary_report(
         "",
         model_comparison.to_markdown(index=False),
         "",
-        f"The lowest external-test RMSE belongs to **{best['Model']}**. All models train on `log1p(price)` to reduce target skew; predictions are converted back to price units before MAE, MSE, RMSE, and R² are calculated.",
+        f"The lowest external-test RMSE belongs to **{best['Model']}**. All models train on `log1p(price)` to reduce target skew; predictions are converted back to price units before MAE, MedianAE, MSE, RMSE, and R² are calculated.",
         f"Linear residual diagnostics: {residuals}",
         "",
         "## Business use",
