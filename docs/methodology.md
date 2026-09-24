@@ -47,7 +47,7 @@ The source train file is used for training and cross-validation. The source test
 - Rare categories are grouped by `OneHotEncoder(min_frequency=20)`.
 - A shuffled, seeded three-fold strategy is used consistently for tuning and model comparison.
 - Model fitting defaults to one process for reliable execution on Windows; this changes runtime, not results.
-- Alpha tuning uses `GridSearchCV` on log-target RMSE. Final CV mean and standard deviation are computed as RMSE in original price units.
+- Alpha tuning uses `GridSearchCV` with a custom scorer that converts log-target predictions back to original price units, so alpha selection and final CV comparison both optimize RMSE in dollars.
 - Ridge coefficient magnitude is also summarized across every candidate alpha so shrinkage is measured, not merely described.
 - Numeric multicollinearity is measured with VIF-style diagnostics and a condition number. These diagnostics supplement, rather than replace, coefficient and residual interpretation.
 - Coefficients are associations on the log-price scale. They are not causal effects.
