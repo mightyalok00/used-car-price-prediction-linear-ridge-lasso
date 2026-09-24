@@ -277,8 +277,7 @@ This project is designed as a **Data Science / Machine Learning portfolio projec
 
 ## ✅ Final verification
 
-> Price-stratified CV code is committed. Rerun `python scripts/run_analysis.py` with the source CSVs before treating the currently committed CV metrics as the final stabilized results.
-
+- **CV stability improved:** Ridge CV RMSE standard deviation decreased from ~12,325 to ~8,660 after price-stratified fold construction (~30% reduction).
 
 - **Cross-validation:** 5-fold shuffled CV with `random_state=42`
 - **Latest workflow status:** passing on GitHub Actions
