@@ -132,7 +132,7 @@ The full assignment is documented in [docs/questions.md](docs/questions.md), and
 
 ### Cross-validation
 
-The committed results use **5-fold shuffled cross-validation with `random_state=42`**. The regenerated tuning tables, model-comparison metrics, and run metadata are aligned with this configuration.
+The workflow now uses **5-fold shuffled, price-stratified cross-validation with `random_state=42`**. Training prices are quantile-binned only for fold construction so each validation fold receives a more comparable target distribution. A generated fold-balance table makes the stability check auditable.
 
 
 The committed results were produced with the environment recorded in [outputs/reports/run_metadata.json](outputs/reports/run_metadata.json):
@@ -235,6 +235,7 @@ Or open the executed notebook:
 
 - [Analysis summary](outputs/reports/analysis_summary.md)
 - [Model comparison](outputs/tables/model_comparison.csv)
+- [CV fold price balance](outputs/tables/cv_fold_price_balance.csv)
 - [Depreciation by age band](outputs/tables/depreciation_by_age_band.csv)
 - [Segment value retention](outputs/tables/segment_value_retention.csv)
 - [Top potentially underpriced listings](outputs/tables/top_100_potentially_underpriced.csv)
@@ -275,6 +276,9 @@ These topics make the project easier to discover for recruiters, learners, and d
 This project is designed as a **Data Science / Machine Learning portfolio project** demonstrating regression modeling, model comparison, reproducible analysis, and business interpretation rather than only model training.
 
 ## ✅ Final verification
+
+> Price-stratified CV code is committed. Rerun `python scripts/run_analysis.py` with the source CSVs before treating the currently committed CV metrics as the final stabilized results.
+
 
 - **Cross-validation:** 5-fold shuffled CV with `random_state=42`
 - **Latest workflow status:** passing on GitHub Actions
