@@ -1,0 +1,6 @@
+{
+  "condition_number": 4.077133095236237,
+  "n_numeric_features": 26,
+  "features_vif_gt_5": 0,
+  "features_vif_gt_10": 0
+}

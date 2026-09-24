@@ -1,5 +1,5 @@
 {
-  "completed_utc": "2026-09-24T13:17:08.192263+00:00",
+  "completed_utc": "2026-09-24T14:41:44.474501+00:00",
   "python": "3.14.7 (tags/v3.14.7:823f032, Aug  5 2026, 10:51:32) [MSC v.1944 64 bit (AMD64)]",
   "platform": "Windows-11-10.0.26200-SP0",
   "pandas": "3.0.5",
@@ -18,7 +18,7 @@
       "columns": 36,
       "total_cells": 687924,
       "shape_formula": "rows = df.shape[0]; columns = df.shape[1]; total cells = rows * columns",
-      "memory_bytes": 7712586,
+      "memory_bytes": 14716330,
       "duplicate_rows": 0
     },
     {
@@ -27,7 +27,7 @@
       "columns": 36,
       "total_cells": 172008,
       "shape_formula": "rows = df.shape[0]; columns = df.shape[1]; total cells = rows * columns",
-      "memory_bytes": 1928694,
+      "memory_bytes": 3679390,
       "duplicate_rows": 0
     }
   ],
