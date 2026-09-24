@@ -12,7 +12,7 @@ from sklearn.compose import ColumnTransformer
 from sklearn.impute import SimpleImputer
 from sklearn.linear_model import Lasso, LinearRegression, Ridge
 from sklearn.metrics import make_scorer, mean_absolute_error, mean_squared_error, r2_score
-from sklearn.model_selection import GridSearchCV, KFold
+from sklearn.model_selection import GridSearchCV, StratifiedKFold
 from sklearn.pipeline import Pipeline
 from sklearn.preprocessing import OneHotEncoder, StandardScaler
 
@@ -79,12 +79,55 @@ ORIGINAL_PRICE_RMSE_SCORER = make_scorer(
 )
 
 
+
+def make_price_stratified_cv(
+    y: pd.Series | np.ndarray,
+    n_splits: int,
+    random_state: int,
+    n_bins: int = 10,
+) -> tuple[list[tuple[np.ndarray, np.ndarray]], pd.DataFrame]:
+    """Create regression CV folds stratified by quantile-binned target price.
+
+    Stratifying on target quantiles keeps the price distribution more comparable
+    across validation folds while preserving shuffled, seeded reproducibility.
+    """
+    y_series = pd.Series(np.asarray(y, dtype=float)).reset_index(drop=True)
+    if len(y_series) < n_splits * 2:
+        raise ValueError("Not enough rows to build stable stratified CV folds.")
+
+    max_bins = max(2, min(n_bins, len(y_series) // n_splits))
+    # Rank first so duplicate price values cannot collapse qcut bins unpredictably.
+    bins = pd.qcut(y_series.rank(method="first"), q=max_bins, labels=False, duplicates="drop")
+    counts = pd.Series(bins).value_counts()
+    if counts.empty or int(counts.min()) < n_splits:
+        raise ValueError("Target bins do not contain enough samples for the requested folds.")
+
+    splitter = StratifiedKFold(n_splits=n_splits, shuffle=True, random_state=random_state)
+    splits = list(splitter.split(np.zeros(len(y_series)), bins))
+
+    rows = []
+    for fold, (_, valid_idx) in enumerate(splits, start=1):
+        fold_y = y_series.iloc[valid_idx]
+        rows.append(
+            {
+                "fold": fold,
+                "rows": int(len(valid_idx)),
+                "price_mean": float(fold_y.mean()),
+                "price_median": float(fold_y.median()),
+                "price_std": float(fold_y.std(ddof=1)),
+                "price_min": float(fold_y.min()),
+                "price_max": float(fold_y.max()),
+            }
+        )
+    return splits, pd.DataFrame(rows)
+
+
 def tune_model(
     pipeline: Pipeline,
     X: pd.DataFrame,
     y_log: np.ndarray,
     alphas: tuple[float, ...],
-    cv: KFold,
+    cv: list[tuple[np.ndarray, np.ndarray]],
     n_jobs: int,
 ) -> tuple[Pipeline, pd.DataFrame]:
     search = GridSearchCV(
@@ -126,7 +169,7 @@ def cross_validate_price(
     """Evaluate every fold on original-dollar RMSE, despite log-target training."""
     scores: list[float] = []
     y_array = np.asarray(y)
-    for train_idx, valid_idx in cv.split(X):
+    for train_idx, valid_idx in cv:
         fitted = clone(pipeline).fit(X.iloc[train_idx], np.log1p(y_array[train_idx]))
         pred = predict_price(fitted, X.iloc[valid_idx])
         scores.append(float(np.sqrt(mean_squared_error(y_array[valid_idx], pred))))
