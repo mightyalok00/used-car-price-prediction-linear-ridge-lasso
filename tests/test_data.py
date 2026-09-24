@@ -9,6 +9,7 @@ from src.data import align_feature_columns, clean_dataset, inspect_dataset
 from src.modeling import (
     build_preprocessor,
     make_pipeline,
+    make_price_stratified_cv,
     numeric_multicollinearity_diagnostics,
     regression_metrics,
     ridge_coefficient_path,
@@ -125,3 +126,15 @@ def test_regression_metrics_known_values() -> None:
 def test_project_config_defaults_to_five_fold_cv(tmp_path) -> None:
     config = ProjectConfig(project_root=tmp_path)
     assert config.cv_folds == 5
+
+
+def test_price_stratified_cv_balances_target_distribution() -> None:
+    y = pd.Series(np.linspace(5_000, 100_000, 100), dtype=float)
+    splits, balance = make_price_stratified_cv(y, n_splits=5, random_state=42, n_bins=10)
+
+    assert len(splits) == 5
+    assert balance["rows"].nunique() == 1
+    assert balance["rows"].iloc[0] == 20
+    # Quantile stratification should keep fold means reasonably close.
+    relative_spread = (balance["price_mean"].max() - balance["price_mean"].min()) / y.mean()
+    assert relative_spread < 0.20
