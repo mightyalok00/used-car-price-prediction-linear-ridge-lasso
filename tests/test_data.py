@@ -4,6 +4,7 @@ import numpy as np
 import pandas as pd
 from sklearn.linear_model import Ridge
 
+from src.config import ProjectConfig
 from src.data import align_feature_columns, clean_dataset, inspect_dataset
 from src.modeling import (
     build_preprocessor,
@@ -119,3 +120,8 @@ def test_regression_metrics_known_values() -> None:
     assert metrics["MSE"] == 4.0
     assert metrics["RMSE"] == 2.0
     assert np.isclose(metrics["R2"], 0.84)
+
+
+def test_project_config_defaults_to_five_fold_cv(tmp_path) -> None:
+    config = ProjectConfig(project_root=tmp_path)
+    assert config.cv_folds == 5
