@@ -23,7 +23,9 @@ from .modeling import (
     coefficient_table,
     fit_and_evaluate,
     make_pipeline,
+    numeric_multicollinearity_diagnostics,
     residual_diagnostics,
+    ridge_coefficient_path,
     select_model_features,
     tune_model,
 )
@@ -114,6 +116,10 @@ def run_analysis(config: ProjectConfig) -> dict[str, Any]:
     y_test = test[config.target].astype(float)
     save_json(model_groups, config.reports_dir / "model_feature_plan.json")
 
+    vif_table, multicollinearity_summary = numeric_multicollinearity_diagnostics(X_train)
+    _write_csv(vif_table, config.tables_dir / "numeric_multicollinearity_vif.csv")
+    save_json(multicollinearity_summary, config.reports_dir / "multicollinearity_summary.json")
+
     preprocessor = build_preprocessor(model_groups, config.one_hot_min_frequency)
     cv = KFold(n_splits=config.cv_folds, shuffle=True, random_state=config.random_state)
     linear_template = make_pipeline(preprocessor, LinearRegression(n_jobs=config.n_jobs))
@@ -131,6 +137,8 @@ def run_analysis(config: ProjectConfig) -> dict[str, Any]:
     )
     _write_csv(ridge_search, config.tables_dir / "ridge_alpha_search.csv")
     _write_csv(lasso_search, config.tables_dir / "lasso_alpha_search.csv")
+    ridge_path = ridge_coefficient_path(ridge_template, X_train, y_train, config.ridge_alphas)
+    _write_csv(ridge_path, config.tables_dir / "ridge_coefficient_path.csv")
 
     best_ridge_alpha = float(ridge_best.named_steps["model"].alpha)
     best_lasso_alpha = float(lasso_best.named_steps["model"].alpha)
@@ -216,6 +224,8 @@ def run_analysis(config: ProjectConfig) -> dict[str, Any]:
         config.tables_dir / "dataset_dimensions.csv",
         config.tables_dir / "model_comparison.csv",
         config.tables_dir / "pricing_opportunities_all_test_rows.csv",
+        config.tables_dir / "numeric_multicollinearity_vif.csv",
+        config.tables_dir / "ridge_coefficient_path.csv",
         config.reports_dir / "analysis_summary.md",
         config.reports_dir / "run_metadata.json",
     ]
@@ -244,7 +254,10 @@ def run_analysis(config: ProjectConfig) -> dict[str, Any]:
         "outliers": outliers,
         "correlations": correlations,
         "categorical_summary": categorical,
+        "multicollinearity_vif": vif_table,
+        "multicollinearity_summary": multicollinearity_summary,
         "ridge_search": ridge_search,
+        "ridge_coefficient_path": ridge_path,
         "lasso_search": lasso_search,
         "comparison": comparison,
         "residual_diagnostics": linear_residuals,
