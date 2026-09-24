@@ -5,5 +5,5 @@ Clean train rows: 19075
 Clean test rows: 4768
 Models evaluated: Linear Regression, Ridge Regression, Lasso Regression
 Best external-test RMSE model: Ridge Regression
-Required output files checked: 7
+Required output files checked: 8
 No source CSV was copied or modified.

@@ -1,5 +1,5 @@
 {
-  "completed_utc": "2026-09-24T15:12:00.037450+00:00",
+  "completed_utc": "2026-09-24T15:30:41.045377+00:00",
   "python": "3.14.7 (tags/v3.14.7:823f032, Aug  5 2026, 10:51:32) [MSC v.1944 64 bit (AMD64)]",
   "platform": "Windows-11-10.0.26200-SP0",
   "pandas": "3.0.5",
@@ -9,6 +9,7 @@
   "test_path": "D:\\Used Car Listings Features and Price Prediction\\test.csv",
   "target": "price",
   "cv_folds": 5,
+  "cv_strategy": "StratifiedKFold on quantile-binned training price",
   "random_state": 42,
   "best_external_test_model": "Ridge Regression",
   "raw_dimensions": [
