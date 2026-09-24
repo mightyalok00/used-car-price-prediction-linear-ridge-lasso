@@ -45,7 +45,7 @@ The source train file is used for training and cross-validation. The source test
 - `year` is represented by engineered `vehicle_age` in the model to avoid exact redundancy.
 - `min_mpg` and `max_mpg` are replaced by `avg_mpg` in the model. The original fields remain available for EDA.
 - Rare categories are grouped by `OneHotEncoder(min_frequency=20)`.
-- A shuffled, seeded three-fold strategy is used consistently for tuning and model comparison.
+- A shuffled, seeded five-fold strategy is used consistently for tuning and model comparison.
 - Model fitting defaults to one process for reliable execution on Windows; this changes runtime, not results.
 - Alpha tuning uses `GridSearchCV` with a custom scorer that converts log-target predictions back to original price units, so alpha selection and final CV comparison both optimize RMSE in dollars.
 - Ridge coefficient magnitude is also summarized across every candidate alpha so shrinkage is measured, not merely described.
@@ -65,4 +65,4 @@ A listing is a review candidate when actual price differs from predicted price b
 
 ## Validation scope
 
-The workflow validation checks that required generated artifacts exist and are non-empty. Analytical correctness is additionally protected by deterministic tests for binary categorical summaries, multicollinearity diagnostics, Ridge coefficient-path generation, multi-segment retention, and under/overpricing flag direction.
+The workflow validation checks that required generated artifacts exist and are non-empty. Analytical correctness is additionally protected by deterministic tests for binary categorical summaries, multicollinearity diagnostics, Ridge coefficient-path generation, multi-segment retention, under/overpricing flag direction, and the configured five-fold CV default.
