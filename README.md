@@ -1,14 +1,39 @@
-# Used Car Price Prediction — Linear, Ridge & Lasso
+<div align="center">
 
-![Python](https://img.shields.io/badge/Python-3.14.7-blue)
-![scikit-learn](https://img.shields.io/badge/scikit--learn-1.9.0-orange)
-![Status](https://img.shields.io/badge/status-complete-brightgreen)
-![Questions](https://img.shields.io/badge/questions-16%2F16-success)
-![Tests](https://github.com/mightyalok00/used-car-price-prediction-linear-ridge-lasso/actions/workflows/tests.yml/badge.svg)
+# 🚗 Used Car Price Prediction
+### Linear Regression • Ridge • Lasso
 
-An end-to-end machine-learning portfolio project for **used-car valuation** using Multiple Linear Regression, Ridge Regression, and Lasso Regression. The project combines schema-aware cleaning, leakage-safe preprocessing, cross-validation, model diagnostics, and dealership-focused business analysis.
+[![Python](https://img.shields.io/badge/Python-3.14.7-blue)](#reproducibility)
+[![scikit-learn](https://img.shields.io/badge/scikit--learn-1.9.0-orange)](#reproducibility)
+[![Tests](https://github.com/mightyalok00/used-car-price-prediction-linear-ridge-lasso/actions/workflows/tests.yml/badge.svg)](https://github.com/mightyalok00/used-car-price-prediction-linear-ridge-lasso/actions)
+[![Questions](https://img.shields.io/badge/Assignment-16%2F16-success)](#all-16-questions-covered)
+[![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](LICENSE)
+![Status](https://img.shields.io/badge/Status-Portfolio%20Ready-brightgreen)
 
-## Portfolio snapshot
+**End-to-end machine-learning project for used-car valuation, model comparison, diagnostics, and dealership pricing intelligence.**
+
+[Notebook](notebooks/01_complete_used_car_analysis.ipynb) •
+[Questions](docs/questions.md) •
+[Methodology](docs/methodology.md) •
+[Results](outputs/reports/analysis_summary.md) •
+[Tests](tests/test_data.py)
+
+</div>
+
+---
+
+This project compares **Multiple Linear Regression, Ridge Regression, and Lasso Regression** using schema-aware cleaning, leakage-safe preprocessing, cross-validation, measured diagnostics, and business-focused pricing analysis.
+
+## 🌟 Why this project stands out
+
+- **16/16 assignment questions answered** with reproducible code and committed outputs.
+- **Leakage-safe sklearn pipelines** for imputation, scaling, rare-category handling, and encoding.
+- **Three regression approaches compared** on the same holdout and cross-validation strategy.
+- **Real model diagnostics** including residual behavior, VIF-style multicollinearity checks, and Ridge coefficient shrinkage.
+- **Business-ready outputs** for valuation, depreciation, inventory selection, and pricing review.
+- **Automated GitHub Actions tests** protect the core analysis logic.
+
+## 📊 Portfolio snapshot
 
 | Item | Result |
 | --- | --- |
@@ -33,7 +58,7 @@ An end-to-end machine-learning portfolio project for **used-car valuation** usin
 
 > The corrected workflow has been rerun on the source datasets, and the committed outputs now include the regenerated VIF diagnostics, Ridge coefficient path, expanded categorical analysis, and multi-segment retention results.
 
-## Key findings & business impact
+## 💡 Key findings & business impact
 
 - **Ridge Regression** produced the lowest external-test RMSE, narrowly outperforming the unregularized baseline.
 - **Mileage** has one of the strongest negative relationships with price; vehicle age is also negatively associated with value.
@@ -42,7 +67,7 @@ An end-to-end machine-learning portfolio project for **used-car valuation** usin
 - The outputs can support first-pass **vehicle valuation, trade-in negotiation, inventory acquisition, depreciation analysis, and listing-price review**.
 - Pricing flags are screening signals only; inspection, local comparables, title/service history, geography, seller type, and market demand should still be considered.
 
-## Model results
+## 🧠 Model results
 
 | Model | Test MAE | Test RMSE | Test R² | Best alpha | Active features | Zero coefficients |
 | --- | ---: | ---: | ---: | ---: | ---: | ---: |
@@ -52,7 +77,7 @@ An end-to-end machine-learning portfolio project for **used-car valuation** usin
 
 > Ridge has the lowest external-test RMSE. The difference from Linear Regression is small, so this is a narrow performance edge rather than a large practical gap.
 
-## Model-quality visuals
+## 📈 Model-quality visuals
 
 ### External-test RMSE comparison
 
@@ -66,7 +91,7 @@ Linear and Ridge are effectively tied on the external holdout; Ridge is lower by
 
 As alpha increases, the Ridge coefficient norms shrink monotonically while all 630 encoded coefficients remain active, which is the expected L2-regularization behavior.
 
-## EDA highlights
+## 🔎 EDA highlights
 
 ### Price distribution and log transformation
 
@@ -82,7 +107,7 @@ As alpha increases, the Ridge coefficient norms shrink monotonically while all 6
 
 The generated tables provide deeper EDA coverage for categorical pricing, outliers, depreciation, segment value retention, correlations, model coefficients, and pricing opportunities.
 
-## All 16 questions covered
+## ✅ All 16 questions covered
 
 The full assignment is documented in [docs/questions.md](docs/questions.md), and the executed notebook answers **Q1 through Q16**:
 
@@ -103,7 +128,7 @@ The full assignment is documented in [docs/questions.md](docs/questions.md), and
 15. Depreciation and inventory strategy
 16. Pricing strategy and opportunities
 
-## Reproducibility
+## 🔁 Reproducibility
 
 The committed results were produced with the environment recorded in [outputs/reports/run_metadata.json](outputs/reports/run_metadata.json):
 
@@ -115,7 +140,7 @@ The committed results were produced with the environment recorded in [outputs/re
 - **Cross-validation folds:** 3
 - **Recorded platform:** Windows 11
 
-### Reproducibility checklist
+### 🔁 Reproducibility checklist
 
 - [x] Environment versions recorded
 - [x] Random state recorded
@@ -134,7 +159,7 @@ The committed results were produced with the environment recorded in [outputs/re
 
 Cleaning removes 34 train rows and 10 test rows with unusable target values. Predictor gaps are handled inside leakage-safe preprocessing pipelines.
 
-## Project structure
+## 🗂️ Project structure
 
     used-car-price-prediction-linear-ridge-lasso/
     ├── README.md
@@ -164,7 +189,7 @@ Cleaning removes 34 train rows and 10 test rows with unusable target values. Pre
         ├── tables/
         └── reports/
 
-## Run the project
+## ▶️ Run the project
 
 ### 1. Clone
 
@@ -210,7 +235,7 @@ Or open the executed notebook:
 - [Top potentially underpriced listings](outputs/tables/top_100_potentially_underpriced.csv)
 - [Top potentially overpriced listings](outputs/tables/top_100_potentially_overpriced.csv)
 
-## Methodology
+## 🧪 Methodology
 
 The models learn **log1p(price)** to reduce target skew. Predictions are converted back to price units before MAE, MSE, RMSE, and R² are calculated.
 
@@ -226,7 +251,7 @@ The preprocessing pipeline:
 
 See [docs/methodology.md](docs/methodology.md) for the full methodology.
 
-## Important interpretation notes
+## ⚠️ Important interpretation notes
 
 - The supplied test file contains price, so it is treated as a **labeled external holdout** rather than mixed into training.
 - Coefficients describe model associations, not causal effects.
@@ -234,6 +259,22 @@ See [docs/methodology.md](docs/methodology.md) for the full methodology.
 - Extreme prices remain in the analysis; log-target training reduces their influence but does not eliminate large-dollar residuals.
 - Underpriced/overpriced labels require vehicle inspection and local-market validation before any business decision.
 
-## Repository purpose
+## 🎯 Repository purpose
 
 This project is designed as a **Data Science / Machine Learning portfolio project** demonstrating regression modeling, model comparison, reproducible analysis, and business interpretation rather than only model training.
+
+## 📄 License
+
+The source code and project documentation are released under the [MIT License](LICENSE).
+
+The dataset itself is **not redistributed by this repository** and remains subject to the terms of its original provider. Users should obtain the source CSV files from the original dataset source and comply with its applicable terms.
+
+---
+
+<div align="center">
+
+**Built by Alok Agarwal** • Data Science / AI-ML portfolio project
+
+⭐ If this project is useful, consider starring the repository.
+
+</div>
