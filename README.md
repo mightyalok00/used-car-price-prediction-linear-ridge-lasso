@@ -130,9 +130,9 @@ The full assignment is documented in [docs/questions.md](docs/questions.md), and
 
 ## 🔁 Reproducibility
 
-### CV configuration note
+### Cross-validation
 
-The project default is now **5-fold shuffled cross-validation with `random_state=42`**. The committed result tables were generated before this final CV-default change, so rerun `python scripts/run_analysis.py` with the source CSV files before treating the committed CV numbers as the final 5-fold results. The external source CSV files are intentionally not stored in GitHub.
+The committed results use **5-fold shuffled cross-validation with `random_state=42`**. The regenerated tuning tables, model-comparison metrics, and run metadata are aligned with this configuration.
 
 
 The committed results were produced with the environment recorded in [outputs/reports/run_metadata.json](outputs/reports/run_metadata.json):
