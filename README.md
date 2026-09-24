@@ -264,9 +264,26 @@ See [docs/methodology.md](docs/methodology.md) for the full methodology.
 - Extreme prices remain in the analysis; log-target training reduces their influence but does not eliminate large-dollar residuals.
 - Underpriced/overpriced labels require vehicle inspection and local-market validation before any business decision.
 
+## 🏷️ Repository topics
+
+`machine-learning` · `data-science` · `python` · `scikit-learn` · `linear-regression` · `ridge-regression` · `lasso-regression` · `price-prediction`
+
+These topics make the project easier to discover for recruiters, learners, and developers searching for regression and ML portfolio work.
+
 ## 🎯 Repository purpose
 
 This project is designed as a **Data Science / Machine Learning portfolio project** demonstrating regression modeling, model comparison, reproducible analysis, and business interpretation rather than only model training.
+
+## ✅ Final verification
+
+- **Cross-validation:** 5-fold shuffled CV with `random_state=42`
+- **Latest workflow status:** passing on GitHub Actions
+- **Validation report:** PASS
+- **Assignment coverage:** 16 / 16 questions
+- **Notebook stored execution errors:** 0
+- **License:** MIT
+- **Best external-test model:** Ridge Regression
+- **Best external-test RMSE:** approximately 13,942
 
 ## 📄 License
 
