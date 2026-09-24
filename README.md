@@ -28,7 +28,7 @@ This project compares **Multiple Linear Regression, Ridge Regression, and Lasso 
 
 - **16/16 assignment questions answered** with reproducible code and committed outputs.
 - **Leakage-safe sklearn pipelines** for imputation, scaling, rare-category handling, and encoding.
-- **Three regression approaches compared** on the same holdout and cross-validation strategy.
+- **Three regression approaches compared** on the same holdout and five-fold cross-validation strategy.
 - **Real model diagnostics** including residual behavior, VIF-style multicollinearity checks, and Ridge coefficient shrinkage.
 - **Business-ready outputs** for valuation, depreciation, inventory selection, and pricing review.
 - **Automated GitHub Actions tests** protect the core analysis logic.
@@ -130,6 +130,11 @@ The full assignment is documented in [docs/questions.md](docs/questions.md), and
 
 ## 🔁 Reproducibility
 
+### CV configuration note
+
+The project default is now **5-fold shuffled cross-validation with `random_state=42`**. The committed result tables were generated before this final CV-default change, so rerun `python scripts/run_analysis.py` with the source CSV files before treating the committed CV numbers as the final 5-fold results. The external source CSV files are intentionally not stored in GitHub.
+
+
 The committed results were produced with the environment recorded in [outputs/reports/run_metadata.json](outputs/reports/run_metadata.json):
 
 - **Python:** 3.14.7
@@ -137,7 +142,7 @@ The committed results were produced with the environment recorded in [outputs/re
 - **NumPy:** 2.5.2
 - **scikit-learn:** 1.9.0
 - **Random state:** 42
-- **Cross-validation folds:** 3
+- **Cross-validation folds:** 5 (default workflow)
 - **Recorded platform:** Windows 11
 
 ### 🔁 Reproducibility checklist
