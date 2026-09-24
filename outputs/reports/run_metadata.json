@@ -1,0 +1,35 @@
+{
+  "completed_utc": "2026-09-24T13:17:08.192263+00:00",
+  "python": "3.14.7 (tags/v3.14.7:823f032, Aug  5 2026, 10:51:32) [MSC v.1944 64 bit (AMD64)]",
+  "platform": "Windows-11-10.0.26200-SP0",
+  "pandas": "3.0.5",
+  "numpy": "2.5.2",
+  "scikit_learn": "1.9.0",
+  "train_path": "D:\\Used Car Listings Features and Price Prediction\\train.csv",
+  "test_path": "D:\\Used Car Listings Features and Price Prediction\\test.csv",
+  "target": "price",
+  "cv_folds": 3,
+  "random_state": 42,
+  "best_external_test_model": "Ridge Regression",
+  "raw_dimensions": [
+    {
+      "dataset": "train.csv",
+      "rows": 19109,
+      "columns": 36,
+      "total_cells": 687924,
+      "shape_formula": "rows = df.shape[0]; columns = df.shape[1]; total cells = rows * columns",
+      "memory_bytes": 7712586,
+      "duplicate_rows": 0
+    },
+    {
+      "dataset": "test.csv",
+      "rows": 4778,
+      "columns": 36,
+      "total_cells": 172008,
+      "shape_formula": "rows = df.shape[0]; columns = df.shape[1]; total cells = rows * columns",
+      "memory_bytes": 1928694,
+      "duplicate_rows": 0
+    }
+  ],
+  "status": "completed"
+}

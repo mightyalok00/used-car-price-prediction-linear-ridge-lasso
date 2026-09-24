@@ -1,0 +1,53 @@
+{
+  "numerical_continuous": [
+    "year",
+    "mileage",
+    "engine_size",
+    "min_mpg",
+    "max_mpg",
+    "vehicle_age",
+    "avg_mpg"
+  ],
+  "binary_indicator": [
+    "automatic_transmission",
+    "damaged",
+    "first_owner",
+    "personal_using",
+    "turbo",
+    "alloy_wheels",
+    "adaptive_cruise_control",
+    "navigation_system",
+    "power_liftgate",
+    "backup_camera",
+    "keyless_start",
+    "remote_start",
+    "sunroof/moonroof",
+    "automatic_emergency_braking",
+    "stability_control",
+    "leather_seats",
+    "memory_seat",
+    "third_row_seating",
+    "apple_car_play/android_auto",
+    "bluetooth",
+    "usb_port",
+    "heated_seats"
+  ],
+  "categorical_nominal": [
+    "brand",
+    "model",
+    "engine",
+    "transmission",
+    "fuel_type",
+    "drivetrain",
+    "interior_color",
+    "exterior_color"
+  ],
+  "ordinal": [
+    "year",
+    "vehicle_age"
+  ],
+  "identifier": [],
+  "target": [
+    "price"
+  ]
+}

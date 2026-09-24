@@ -1,0 +1,176 @@
+"""Leakage-safe Linear, Ridge, and Lasso modeling utilities."""
+
+from __future__ import annotations
+
+import time
+from typing import Any
+
+import numpy as np
+import pandas as pd
+from sklearn.base import clone
+from sklearn.compose import ColumnTransformer
+from sklearn.impute import SimpleImputer
+from sklearn.linear_model import Lasso, LinearRegression, Ridge
+from sklearn.metrics import mean_absolute_error, mean_squared_error, r2_score
+from sklearn.model_selection import GridSearchCV, KFold
+from sklearn.pipeline import Pipeline
+from sklearn.preprocessing import OneHotEncoder, StandardScaler
+
+
+def select_model_features(X: pd.DataFrame) -> tuple[pd.DataFrame, dict[str, list[str]]]:
+    """Remove deterministic/redundant EDA fields while adapting to available columns."""
+    drop_if_present = [c for c in ("year", "min_mpg", "max_mpg") if c in X.columns]
+    model_X = X.drop(columns=drop_if_present)
+    categorical = [c for c in model_X.columns if pd.api.types.is_string_dtype(model_X[c]) or model_X[c].dtype == "object"]
+    numeric_all = [c for c in model_X.columns if c not in categorical]
+    binary = [c for c in numeric_all if set(model_X[c].dropna().unique()).issubset({0, 1})]
+    continuous = [c for c in numeric_all if c not in binary]
+    return model_X, {
+        "continuous": continuous,
+        "binary": binary,
+        "categorical": categorical,
+        "dropped_redundant": drop_if_present,
+    }
+
+
+def build_preprocessor(groups: dict[str, list[str]], min_frequency: int) -> ColumnTransformer:
+    numeric_pipe = Pipeline(
+        [("imputer", SimpleImputer(strategy="median", add_indicator=True)), ("scaler", StandardScaler())]
+    )
+    binary_pipe = Pipeline([("imputer", SimpleImputer(strategy="most_frequent"))])
+    categorical_pipe = Pipeline(
+        [
+            ("imputer", SimpleImputer(strategy="most_frequent")),
+            (
+                "onehot",
+                OneHotEncoder(
+                    handle_unknown="infrequent_if_exist",
+                    min_frequency=min_frequency,
+                    drop="first",
+                    sparse_output=True,
+                ),
+            ),
+        ]
+    )
+    transformers = []
+    if groups["continuous"]:
+        transformers.append(("num", numeric_pipe, groups["continuous"]))
+    if groups["binary"]:
+        transformers.append(("binary", binary_pipe, groups["binary"]))
+    if groups["categorical"]:
+        transformers.append(("cat", categorical_pipe, groups["categorical"]))
+    return ColumnTransformer(transformers=transformers, remainder="drop", sparse_threshold=0.3)
+
+
+def make_pipeline(preprocessor: ColumnTransformer, model: Any) -> Pipeline:
+    return Pipeline([("preprocessor", clone(preprocessor)), ("model", model)])
+
+
+def tune_model(
+    pipeline: Pipeline,
+    X: pd.DataFrame,
+    y_log: np.ndarray,
+    alphas: tuple[float, ...],
+    cv: KFold,
+    n_jobs: int,
+) -> tuple[Pipeline, pd.DataFrame]:
+    search = GridSearchCV(
+        pipeline,
+        {"model__alpha": list(alphas)},
+        scoring="neg_root_mean_squared_error",
+        cv=cv,
+        n_jobs=n_jobs,
+        refit=True,
+        return_train_score=True,
+    )
+    search.fit(X, y_log)
+    table = pd.DataFrame(search.cv_results_)[
+        ["param_model__alpha", "mean_train_score", "mean_test_score", "std_test_score", "rank_test_score"]
+    ].copy()
+    table.columns = ["alpha", "mean_train_neg_rmse_log", "mean_cv_neg_rmse_log", "cv_std_log", "rank"]
+    return search.best_estimator_, table.sort_values("rank")
+
+
+def predict_price(fitted: Pipeline, X: pd.DataFrame) -> np.ndarray:
+    return np.maximum(0.0, np.expm1(fitted.predict(X)))
+
+
+def regression_metrics(y_true: pd.Series | np.ndarray, y_pred: np.ndarray) -> dict[str, float]:
+    return {
+        "MAE": float(mean_absolute_error(y_true, y_pred)),
+        "MSE": float(mean_squared_error(y_true, y_pred)),
+        "RMSE": float(np.sqrt(mean_squared_error(y_true, y_pred))),
+        "R2": float(r2_score(y_true, y_pred)),
+    }
+
+
+def cross_validate_price(
+    pipeline: Pipeline,
+    X: pd.DataFrame,
+    y: pd.Series,
+    cv: KFold,
+) -> tuple[float, float, list[float]]:
+    """Evaluate every fold on original-dollar RMSE, despite log-target training."""
+    scores: list[float] = []
+    y_array = np.asarray(y)
+    for train_idx, valid_idx in cv.split(X):
+        fitted = clone(pipeline).fit(X.iloc[train_idx], np.log1p(y_array[train_idx]))
+        pred = predict_price(fitted, X.iloc[valid_idx])
+        scores.append(float(np.sqrt(mean_squared_error(y_array[valid_idx], pred))))
+    return float(np.mean(scores)), float(np.std(scores, ddof=1)), scores
+
+
+def fit_and_evaluate(
+    name: str,
+    pipeline: Pipeline,
+    X_train: pd.DataFrame,
+    y_train: pd.Series,
+    X_test: pd.DataFrame,
+    y_test: pd.Series,
+    cv: KFold,
+    best_alpha: float | None,
+) -> tuple[Pipeline, dict[str, Any], np.ndarray, np.ndarray]:
+    start = time.perf_counter()
+    fitted = clone(pipeline).fit(X_train, np.log1p(y_train))
+    fit_seconds = time.perf_counter() - start
+    pred_train = predict_price(fitted, X_train)
+    pred_test = predict_price(fitted, X_test)
+    test_metrics = regression_metrics(y_test, pred_test)
+    cv_mean, cv_std, cv_scores = cross_validate_price(pipeline, X_train, y_train, cv)
+
+    coef = np.asarray(fitted.named_steps["model"].coef_).ravel()
+    row: dict[str, Any] = {
+        "Model": name,
+        **test_metrics,
+        "CV_RMSE_Mean": cv_mean,
+        "CV_RMSE_Std": cv_std,
+        "Train_R2": float(r2_score(y_train, pred_train)),
+        "Test_R2": test_metrics["R2"],
+        "Best_Alpha": best_alpha if best_alpha is not None else "N/A",
+        "Active_Features": int(np.sum(np.abs(coef) > 1e-10)),
+        "Zero_Coefficients": int(np.sum(np.abs(coef) <= 1e-10)),
+        "Fit_Seconds": float(fit_seconds),
+        "CV_Fold_RMSE": ", ".join(f"{x:.2f}" for x in cv_scores),
+    }
+    return fitted, row, pred_train, pred_test
+
+
+def coefficient_table(fitted: Pipeline) -> pd.DataFrame:
+    names = fitted.named_steps["preprocessor"].get_feature_names_out()
+    values = np.asarray(fitted.named_steps["model"].coef_).ravel()
+    table = pd.DataFrame({"feature": names, "coefficient_log_price": values})
+    table["absolute_coefficient"] = table["coefficient_log_price"].abs()
+    table["is_zero"] = table["absolute_coefficient"] <= 1e-10
+    return table.sort_values("absolute_coefficient", ascending=False).reset_index(drop=True)
+
+
+def residual_diagnostics(y_true: pd.Series, predictions: np.ndarray) -> dict[str, float]:
+    residuals = np.asarray(y_true) - predictions
+    return {
+        "residual_mean": float(np.mean(residuals)),
+        "residual_std": float(np.std(residuals, ddof=1)),
+        "residual_skew": float(pd.Series(residuals).skew()),
+        "residual_kurtosis": float(pd.Series(residuals).kurtosis()),
+        "fitted_abs_residual_correlation": float(np.corrcoef(predictions, np.abs(residuals))[0, 1]),
+        "interpretation": "A fitted-vs-absolute-residual correlation far from zero suggests non-constant error variance.",
+    }

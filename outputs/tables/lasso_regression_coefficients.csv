@@ -1,0 +1,631 @@
+feature,coefficient_log_price,absolute_coefficient,is_zero
+cat__engine_3.0l v6 24v pdi dohc twin turbo,1.330311801468024,1.330311801468024,False
+cat__engine_4.0l h6 24v gdi dohc,0.788526233024822,0.788526233024822,False
+cat__engine_3.8l h6 24v gdi dohc,0.63323522118234,0.63323522118234,False
+cat__engine_6.2l v8 16v gdi ohv supercharged,0.6311301419686585,0.6311301419686585,False
+cat__brand_suzuki,-0.6291590631864237,0.6291590631864237,False
+cat__brand_porsche,0.5719518337311489,0.5719518337311489,False
+cat__engine_6.4l v8 16v mpfi ohv,0.4361851299110933,0.4361851299110933,False
+cat__engine_6.2l v8 16v gdi ohv,0.43296945358581623,0.43296945358581623,False
+cat__engine_3.0l h6 24v gdi dohc twin turbo,0.42457163617398985,0.42457163617398985,False
+cat__engine_4.0l v8 32v gdi dohc twin turbo,0.41937961114892924,0.41937961114892924,False
+cat__brand_fiat,-0.39966929933334006,0.39966929933334006,False
+cat__engine_4.4l v8 32v gdi dohc twin turbo,0.3934024840969429,0.3934024840969429,False
+cat__engine_5.7l v8 32v mpfi dohc,0.37836542350428787,0.37836542350428787,False
+cat__model_cts-v base,0.3464257472066393,0.3464257472066393,False
+cat__engine_v8,0.34221730193979555,0.34221730193979555,False
+cat__model_500e battery electric,-0.34096730899131167,0.34096730899131167,False
+cat__model_silverado 2500 lt,0.3331721825910345,0.3331721825910345,False
+cat__model_lancer evolution gsr,0.32812897640623634,0.32812897640623634,False
+cat__transmission_2-speed automatic,0.3267785364808056,0.3267785364808056,False
+cat__model_mirage g4 es,-0.3251571944786875,0.3251571944786875,False
+cat__engine_5.0l v8 32v gdi dohc supercharged,0.324948362507809,0.324948362507809,False
+cat__engine_2.0l i4 16v gdi dohc turbo flexible fuel,-0.32070414547269793,0.32070414547269793,False
+cat__engine_2.0l i4 16v ddi dohc turbo diesel,-0.31966950668011107,0.31966950668011107,False
+cat__engine_2.0l i4 16v mpfi dohc turbo,0.3144388597630176,0.3144388597630176,False
+cat__engine_5.5l v8 32v gdi dohc twin turbo,0.3128657738564043,0.3128657738564043,False
+cat__engine_5.3l v8 16v gdi ohv,0.30964937154409405,0.30964937154409405,False
+cat__engine_6.7l v8 32v ddi ohv turbo diesel,0.3006744350242503,0.3006744350242503,False
+cat__model_macan s,-0.29045565857388955,0.29045565857388955,False
+cat__fuel_type_unknown,0.2834538903047019,0.2834538903047019,False
+cat__model_wrangler unlimited rubicon,0.2786489225811275,0.2786489225811275,False
+cat__model_rover discovery sport se,-0.2760963506121223,0.2760963506121223,False
+cat__model_cayenne base,-0.27079600646967145,0.27079600646967145,False
+cat__drivetrain_unknown,0.26242815211106685,0.26242815211106685,False
+cat__engine_i4,-0.2602687252094312,0.2602687252094312,False
+cat__engine_2.0l i4 16v gdi sohc turbo,-0.259086405520025,0.259086405520025,False
+cat__engine_3.0l i6 24v gdi dohc twin turbo,0.24805115210643516,0.24805115210643516,False
+cat__brand_mercedes-benz,0.24761918346518402,0.24761918346518402,False
+num__mileage,-0.243428319668489,0.243428319668489,False
+cat__engine_4.7l v8 32v mpfi dohc,0.24182619643510744,0.24182619643510744,False
+cat__brand_land,0.24122216608876376,0.24122216608876376,False
+cat__brand_mazda,-0.2394172620004623,0.2394172620004623,False
+cat__engine_6.6l v8 32v ddi ohv turbo diesel,0.22887945043800764,0.22887945043800764,False
+cat__model_macan base,-0.2263511740525683,0.2263511740525683,False
+cat__model_rover discovery sport hse,-0.22464048050185814,0.22464048050185814,False
+cat__model_ghibli base,-0.22456410729225862,0.22456410729225862,False
+cat__fuel_type_electric,-0.2240818861848399,0.2240818861848399,False
+cat__brand_mitsubishi,-0.22281485176811314,0.22281485176811314,False
+cat__brand_hyundai,-0.22047185399802943,0.22047185399802943,False
+cat__model_convertible cooper s,0.21812355609629575,0.21812355609629575,False
+cat__model_ghibli s q4,-0.21803123555673443,0.21803123555673443,False
+cat__engine_1.4l i4 16v gdi dohc turbo,-0.21798886341925205,0.21798886341925205,False
+cat__engine_6.0l v8 16v mpfi ohv,0.20942251225625183,0.20942251225625183,False
+cat__model_f-250 lariat,0.20937066666886806,0.20937066666886806,False
+cat__interior_color_dark slate gray,-0.207925507950056,0.207925507950056,False
+cat__engine_4.0l v6 24v mpfi dohc,0.20528542785709603,0.20528542785709603,False
+cat__brand_maserati,0.20201881988221349,0.20201881988221349,False
+cat__engine_5.6l v8 32v gdi dohc,0.20085765948833742,0.20085765948833742,False
+cat__engine_5.0l v8 32v pdi dohc,0.19888783078638672,0.19888783078638672,False
+cat__engine_1.6l i4 16v gdi dohc,-0.19240836702806388,0.19240836702806388,False
+cat__model_mirage es,-0.19134280408574778,0.19134280408574778,False
+cat__transmission_a/t,-0.18905397892939163,0.18905397892939163,False
+cat__engine_intercooled turbo premium unleaded i-4 2.0 l/121,-0.18375516912261633,0.18375516912261633,False
+cat__engine_1.6l i4 16v gdi dohc turbo,-0.17985517229426562,0.17985517229426562,False
+cat__drivetrain_front-wheel drive,-0.17935347995685155,0.17935347995685155,False
+cat__model_rover range rover evoque pure plus,-0.17897172884973234,0.17897172884973234,False
+cat__engine_5.7l v8 16v mpfi ohv,0.17828231161152855,0.17828231161152855,False
+cat__brand_lexus,0.17809864090604943,0.17809864090604943,False
+cat__engine_1.5l i4 16v gdi dohc turbo,-0.1777086825399412,0.1777086825399412,False
+cat__engine_2.0l i4 16v gdi dohc turbo,-0.17715222768613967,0.17715222768613967,False
+cat__engine_intercooled turbo premium unleaded i-4 2.0 l/122,-0.1763282957610261,0.1763282957610261,False
+cat__model_f-pace s,0.17508885939033544,0.17508885939033544,False
+cat__engine_1.8l i4 16v gdi dohc turbo,-0.1735806805088251,0.1735806805088251,False
+cat__brand_mini,-0.173542036232415,0.173542036232415,False
+cat__brand_kia,-0.17004803610414948,0.17004803610414948,False
+cat__model_wrangler unlimited sahara,0.16958726353384737,0.16958726353384737,False
+cat__model_f-type s,0.16578326902197946,0.16578326902197946,False
+cat__engine_2.0l i4 16v pdi dohc turbo,-0.16512410216957968,0.16512410216957968,False
+cat__model_hardtop john cooper works,0.16329855253916745,0.16329855253916745,False
+cat__engine_6.2l v8 16v mpfi ohv,0.16174225883603913,0.16174225883603913,False
+cat__engine_3.4l h6 24v gdi dohc,0.15847452983186883,0.15847452983186883,False
+cat__engine_3.8l v6 24v gdi dohc,0.15639735872821542,0.15639735872821542,False
+cat__engine_2.3l i4 16v gdi dohc turbo,-0.153908034627994,0.153908034627994,False
+cat__model_grand cherokee l limited,-0.15047824425740836,0.15047824425740836,False
+cat__transmission_10-speed automatic with overdrive,0.149359766778006,0.149359766778006,False
+binary__turbo,0.14841702446388377,0.14841702446388377,False
+cat__engine_3.8l v8 32v gdi dohc twin turbo,0.14743019737476126,0.14743019737476126,False
+cat__model_cayenne s,-0.14730679059277335,0.14730679059277335,False
+cat__transmission_cvt,-0.14517823306890126,0.14517823306890126,False
+cat__model_f-type r,0.13984634031825954,0.13984634031825954,False
+num__vehicle_age,-0.13746332751545387,0.13746332751545387,False
+cat__transmission_6-speed automatic with auto-shift,0.13505049670625174,0.13505049670625174,False
+cat__exterior_color_obsidian black metallic,0.13078285847886453,0.13078285847886453,False
+cat__model_f-250 xlt,0.12888435872598442,0.12888435872598442,False
+cat__model_500 pop,-0.12705814818841746,0.12705814818841746,False
+cat__fuel_type_gasoline,-0.12696597799735101,0.12696597799735101,False
+cat__engine_2.9l v6 24v gdi dohc twin turbo,0.12636046165851672,0.12636046165851672,False
+cat__model_altima 2.5 s,-0.1261041734267414,0.1261041734267414,False
+"cat__engine_ingenium 2l i-4 gasoline direct injection, dohc, variable valve",-0.12531421850682706,0.12531421850682706,False
+cat__engine_2.5l i5 20v mpfi dohc turbo,-0.12456215255039145,0.12456215255039145,False
+binary__third_row_seating,0.12125824085849743,0.12125824085849743,False
+cat__model_ghibli s,-0.12091409796048748,0.12091409796048748,False
+cat__transmission_6-speed manual,0.11914499681955598,0.11914499681955598,False
+cat__engine_3.2l i6 24v mpfi dohc,-0.11708829836838917,0.11708829836838917,False
+"cat__engine_drive-e 2l i-4 gasoline direct injection, dohc, variable valve c",-0.11680488554020695,0.11680488554020695,False
+cat__model_countryman cooper s,0.11536109657189178,0.11536109657189178,False
+cat__interior_color_shale,-0.11518564361400545,0.11518564361400545,False
+cat__transmission_manual,0.11453293177488617,0.11453293177488617,False
+cat__engine_1.5l i3 12v gdi dohc turbo,-0.1134526865445197,0.1134526865445197,False
+cat__model_quattroporte s q4,-0.11319477811040994,0.11319477811040994,False
+cat__model_rover range rover evoque se,-0.11247460778210899,0.11247460778210899,False
+cat__engine_2.0l i4 16v gdi dohc hybrid,0.11177721127726906,0.11177721127726906,False
+cat__fuel_type_e85 flex fuel,-0.11175843520150397,0.11175843520150397,False
+binary__stability_control,-0.11094513410201326,0.11094513410201326,False
+"cat__engine_2l i-4 gasoline direct injection, dohc, variable valve control,",-0.10870849004787886,0.10870849004787886,False
+cat__engine_4.2l v8 32v mpfi dohc,-0.10826826707727054,0.10826826707727054,False
+cat__fuel_type_hybrid,-0.10797622532987715,0.10797622532987715,False
+cat__model_f-type base,0.10753932324409668,0.10753932324409668,False
+cat__brand_volkswagen,-0.10730682321105028,0.10730682321105028,False
+cat__engine_2.5l i4 16v gdi dohc turbo,-0.10703210486020473,0.10703210486020473,False
+cat__transmission_10-speed automatic,0.10649926914866142,0.10649926914866142,False
+cat__model_x7 xdrive40i,0.10628411653006892,0.10628411653006892,False
+cat__interior_color_charcoal black,-0.106207227414288,0.106207227414288,False
+cat__engine_1.6l i4 16v mpfi dohc,-0.1060383336084734,0.1060383336084734,False
+cat__model_granturismo sport,0.1058479646181914,0.1058479646181914,False
+cat__engine_1.8l i4 16v mpfi dohc,-0.10539429169735909,0.10539429169735909,False
+cat__model_cooper base,-0.10377667845101422,0.10377667845101422,False
+cat__brand_audi,0.10372766127436595,0.10372766127436595,False
+cat__engine_2.5l i4 16v pdi dohc hybrid,0.10177367633118875,0.10177367633118875,False
+cat__model_romeo giulia base,-0.10097549908843101,0.10097549908843101,False
+cat__model_palisade sel,0.10067258471309093,0.10067258471309093,False
+binary__navigation_system,0.1002361653750673,0.1002361653750673,False
+cat__model_grand cherokee limited,-0.09921088683959464,0.09921088683959464,False
+cat__model_grand cherokee laredo,-0.09733959010688469,0.09733959010688469,False
+cat__transmission_4-speed automatic,-0.09687361127111263,0.09687361127111263,False
+cat__model_rover discovery hse,-0.09658199304605807,0.09658199304605807,False
+cat__model_mazda6 touring,0.09497127160155555,0.09497127160155555,False
+cat__interior_color_off black,-0.0948839967936877,0.0948839967936877,False
+cat__engine_3.6l v6 24v mpfi dohc,0.09389583623888745,0.09389583623888745,False
+cat__interior_color_ebony black,-0.0920598978501739,0.0920598978501739,False
+cat__engine_1.3l i4 16v gdi sohc turbo,-0.09022568510932,0.09022568510932,False
+cat__exterior_color_pearl white,0.08953425143634197,0.08953425143634197,False
+cat__engine_5.3l v8 16v mpfi ohv flexible fuel,0.08860493916994606,0.08860493916994606,False
+cat__engine_3.0l i6 24v gdi dohc turbo,0.08747264154429879,0.08747264154429879,False
+binary__alloy_wheels,-0.08536380655886235,0.08536380655886235,False
+cat__exterior_color_daytona gray pearl effect,0.08524170683414996,0.08524170683414996,False
+cat__engine_3.7l v6 24v mpfi dohc,0.0832703002569352,0.0832703002569352,False
+cat__brand_nissan,-0.08227921111466899,0.08227921111466899,False
+cat__model_hardtop cooper s,0.08152977993167503,0.08152977993167503,False
+cat__model_cooper s base,-0.07991160293743756,0.07991160293743756,False
+cat__engine_2.0l i4 16v pdi dohc,-0.07665502151914053,0.07665502151914053,False
+cat__interior_color_light gray,-0.07574643723604017,0.07574643723604017,False
+cat__engine_3.0l v6 24v gdi dohc twin turbo,-0.07510270170254923,0.07510270170254923,False
+cat__transmission_variable,-0.0723730415712965,0.0723730415712965,False
+cat__exterior_color_brown,-0.07032625269673912,0.07032625269673912,False
+binary__damaged,-0.0678012531758732,0.0678012531758732,False
+cat__model_odyssey ex-l,0.06710500175756673,0.06710500175756673,False
+cat__model_xt6 sport awd,0.06690316626565976,0.06690316626565976,False
+cat__interior_color_black / red,0.06684658023965624,0.06684658023965624,False
+cat__model_xj xjl portfolio,0.06517991946443553,0.06517991946443553,False
+cat__engine_2.4l i4 16v gdi dohc,0.06497504366474247,0.06497504366474247,False
+cat__interior_color_ebony/ebony,-0.06402514300168692,0.06402514300168692,False
+cat__engine_3.5l v6 24v pdi dohc twin turbo,0.06173208763409385,0.06173208763409385,False
+"cat__engine_2l i-4 gasoline direct injection, multiair2 variable valve contr",-0.05995256995755995,0.05995256995755995,False
+cat__model_panamera 4,-0.05953137687365251,0.05953137687365251,False
+cat__exterior_color_brilliant silver metallic,-0.05888728039951301,0.05888728039951301,False
+binary__memory_seat,0.057931972656052176,0.057931972656052176,False
+"cat__engine_3.6l v-6 gasoline direct injection, dohc, variable valve control",-0.05777632071472457,0.05777632071472457,False
+binary__adaptive_cruise_control,0.05758090222872723,0.05758090222872723,False
+cat__engine_3.5l v6 24v pdi dohc,0.056774490587750324,0.056774490587750324,False
+cat__engine_infrequent_sklearn,0.05655006661341899,0.05655006661341899,False
+cat__interior_color_soft beige,-0.056298028693009206,0.056298028693009206,False
+cat__engine_5.0l v8 32v gdi dohc,-0.05620467647744397,0.05620467647744397,False
+cat__model_veloster n n,0.05599257224871552,0.05599257224871552,False
+cat__engine_2.0l h4 16v gdi dohc turbo,-0.05580125192722515,0.05580125192722515,False
+cat__exterior_color_red,0.055477373237507586,0.055477373237507586,False
+cat__transmission_automatic cvt,-0.05354358536590724,0.05354358536590724,False
+cat__brand_jeep,-0.05327937378784086,0.05327937378784086,False
+cat__interior_color_red / black,0.052998270413375716,0.052998270413375716,False
+cat__model_lancer es,-0.0522179075676404,0.0522179075676404,False
+cat__model_wrangler unlimited sport,0.05201774394529591,0.05201774394529591,False
+cat__interior_color_brown,0.05175670738432278,0.05175670738432278,False
+cat__model_levante gt,0.05157740024437263,0.05157740024437263,False
+cat__model_500l trekking,-0.051440151145656594,0.051440151145656594,False
+cat__model_armada sl,-0.05113697578965001,0.05113697578965001,False
+cat__transmission_5-speed manual,0.05076236684158071,0.05076236684158071,False
+cat__model_cx-5 touring,0.05016096003529638,0.05016096003529638,False
+cat__transmission_automatic,0.0501099111187607,0.0501099111187607,False
+cat__model_romeo stelvio base,-0.04988473008748531,0.04988473008748531,False
+"cat__engine_1.6l i-4 gasoline direct injection, dohc, variable valve control",-0.04966237804454449,0.04966237804454449,False
+cat__engine_1.8l i4 16v mpfi sohc,-0.04908941889833849,0.04908941889833849,False
+cat__exterior_color_gray metallic,0.048309303813162535,0.048309303813162535,False
+cat__model_convertible cooper,0.047315264503775274,0.047315264503775274,False
+cat__exterior_color_super black,-0.04727843735124754,0.04727843735124754,False
+cat__exterior_color_modern steel metallic,0.04677050930311677,0.04677050930311677,False
+cat__brand_toyota,0.04555847445197202,0.04555847445197202,False
+cat__interior_color_red,0.0452859014396112,0.0452859014396112,False
+cat__exterior_color_gold,-0.045172923318117536,0.045172923318117536,False
+cat__exterior_color_iridium silver metallic,-0.04419759349307611,0.04419759349307611,False
+cat__model_countryman cooper s all4,0.04405200517554334,0.04405200517554334,False
+cat__interior_color_blue,0.043783945077544094,0.043783945077544094,False
+cat__model_levante base,-0.04323645355132024,0.04323645355132024,False
+cat__exterior_color_santorini black,0.042812842424057126,0.042812842424057126,False
+num__missingindicator_engine_size,0.04246565237066508,0.04246565237066508,False
+cat__model_xc60 t5 momentum,0.04215233977658769,0.04215233977658769,False
+cat__model_taos 1.5t se,-0.04201472907866031,0.04201472907866031,False
+cat__model_romeo giulia ti,-0.04200402127020048,0.04200402127020048,False
+cat__engine_2.4l i4 16v mpfi dohc,-0.04100211826982317,0.04100211826982317,False
+cat__interior_color_blonde,0.0408251361423442,0.0408251361423442,False
+cat__transmission_8-speed automatic with auto-shift,0.04067465512717785,0.04067465512717785,False
+cat__engine_3.5l v6 24v pdi dohc hybrid,0.040427200453699984,0.040427200453699984,False
+cat__exterior_color_crystal white tricoat,0.04018977023186605,0.04018977023186605,False
+"cat__engine_multiair 1.4l i-4 variable valve control, engine with 101hp",-0.039773538192155525,0.039773538192155525,False
+cat__model_frontier sv,-0.03949700825821763,0.03949700825821763,False
+cat__transmission_7-speed automatic,-0.03928276713199422,0.03928276713199422,False
+cat__model_escalade luxury,-0.0392807029042338,0.0392807029042338,False
+cat__model_cx-5 grand touring,0.038542522471460235,0.038542522471460235,False
+cat__exterior_color_onyx black metallic,0.038516540901903956,0.038516540901903956,False
+cat__transmission_8-speed automatic,0.03818096313382771,0.03818096313382771,False
+cat__model_sportage lx,-0.03800575124198016,0.03800575124198016,False
+cat__engine_3.5l v6 24v gdi sohc,-0.03723002592634023,0.03723002592634023,False
+cat__engine_2.5l i4 16v pdi dohc turbo,-0.03508235559087163,0.03508235559087163,False
+cat__exterior_color_mythos black metallic,0.034795254958579186,0.034795254958579186,False
+cat__engine_3.3l v6 24v gdi dohc,0.03465348031173674,0.03465348031173674,False
+cat__exterior_color_stellar black metallic,0.03450223214623432,0.03450223214623432,False
+cat__model_rover range rover evoque s,-0.03425664698619768,0.03425664698619768,False
+cat__model_xt5 premium luxury,0.032571775751694475,0.032571775751694475,False
+cat__exterior_color_crystal black pearl,-0.03240645200450614,0.03240645200450614,False
+cat__interior_color_parchment,0.03130409704674465,0.03130409704674465,False
+cat__model_500 sport,-0.031101809497475028,0.031101809497475028,False
+cat__interior_color_titan black,0.030982809522601795,0.030982809522601795,False
+cat__model_cr-v ex-l,0.03028491010858321,0.03028491010858321,False
+cat__engine_3.5l v6 24v gdi dohc twin turbo,0.029674212955383007,0.029674212955383007,False
+cat__exterior_color_beige,-0.029642108675992113,0.029642108675992113,False
+cat__exterior_color_alpine white,-0.02844698379240222,0.02844698379240222,False
+cat__brand_ford,0.02838487432220796,0.02838487432220796,False
+cat__exterior_color_santorini black metallic,0.028060951697553016,0.028060951697553016,False
+cat__transmission_7-speed automatic with auto-shift,0.028009241224212878,0.028009241224212878,False
+cat__exterior_color_glacier white,0.027994326020386744,0.027994326020386744,False
+cat__engine_electric motor,-0.027716257968676498,0.027716257968676498,False
+cat__transmission_8-speed automatic with tiptronic,0.0275726023300196,0.0275726023300196,False
+cat__model_500x easy,0.0275298125322296,0.0275298125322296,False
+binary__remote_start,0.027410236566855845,0.027410236566855845,False
+cat__model_tundra sr5,-0.02712102192047411,0.02712102192047411,False
+binary__usb_port,0.02674628878226494,0.02674628878226494,False
+binary__first_owner,0.02662984702631207,0.02662984702631207,False
+cat__engine_2.5l i4 16v mpfi dohc hybrid,0.026030577318131583,0.026030577318131583,False
+binary__apple_car_play/android_auto,0.025759686836269773,0.025759686836269773,False
+cat__interior_color_carbon black,0.02537757068029229,0.02537757068029229,False
+cat__exterior_color_crystal white tri-coat,0.025359815453866875,0.025359815453866875,False
+binary__bluetooth,-0.02488419899132736,0.02488419899132736,False
+cat__engine_1.4l i4 16v mpfi sohc,0.024694312413265456,0.024694312413265456,False
+cat__exterior_color_silver,-0.024433463808179935,0.024433463808179935,False
+cat__brand_volvo,-0.023903930593723616,0.023903930593723616,False
+cat__engine_2.5l i4 16v pdi dohc,-0.02280072122120222,0.02280072122120222,False
+binary__backup_camera,0.021922750700079124,0.021922750700079124,False
+cat__engine_2.0l,0.020854128886047596,0.020854128886047596,False
+cat__exterior_color_nero,0.020593063569146728,0.020593063569146728,False
+cat__transmission_5-speed automatic,0.020543343536806112,0.020543343536806112,False
+cat__engine_3.3l v6 24v gdi dohc twin turbo,0.020527820068007283,0.020527820068007283,False
+cat__exterior_color_brilliant black,-0.018947970017667175,0.018947970017667175,False
+cat__engine_4.6l v8 32v mpfi dohc,0.018765760227528114,0.018765760227528114,False
+cat__exterior_color_green,0.01873106204105704,0.01873106204105704,False
+cat__engine_3.6l v6 24v gdi dohc,0.01863388584433612,0.01863388584433612,False
+cat__model_sorento lx,-0.01831161608228395,0.01831161608228395,False
+cat__engine_2.0l i4 16v mpfi dohc,-0.01804976891605227,0.01804976891605227,False
+cat__engine_3.5l v6 24v gdi dohc,-0.01800391540617523,0.01800391540617523,False
+cat__interior_color_gray,-0.017934524536061484,0.017934524536061484,False
+cat__model_911 carrera s,0.017841205097518745,0.017841205097518745,False
+cat__model_f-150 xlt,0.017724378119153245,0.017724378119153245,False
+cat__engine_v6,0.0174452988704224,0.0174452988704224,False
+cat__brand_bmw,0.017429319188801487,0.017429319188801487,False
+binary__sunroof/moonroof,-0.017381240112440195,0.017381240112440195,False
+cat__exterior_color_summit white,-0.017178070418411243,0.017178070418411243,False
+cat__drivetrain_rear-wheel drive,-0.017112033274411544,0.017112033274411544,False
+cat__model_gx 460 base,0.017042620625977636,0.017042620625977636,False
+cat__interior_color_ebony,-0.0170374598852233,0.0170374598852233,False
+binary__power_liftgate,0.01578204645607393,0.01578204645607393,False
+cat__exterior_color_platinum white pearl,-0.015414421824177465,0.015414421824177465,False
+num__engine_size,0.015121864376822128,0.015121864376822128,False
+cat__model_romeo stelvio quadrifoglio,0.014843429625802023,0.014843429625802023,False
+cat__exterior_color_blue,-0.01464425775535853,0.01464425775535853,False
+cat__model_hardtop cooper,-0.014632444351470495,0.014632444351470495,False
+binary__leather_seats,0.014247823060724536,0.014247823060724536,False
+cat__exterior_color_nero puro,-0.01406851286543026,0.01406851286543026,False
+cat__model_xc90 t5 momentum 7 passenger,0.01339534384552554,0.01339534384552554,False
+cat__exterior_color_sonic silver metallic,0.013238408180710261,0.013238408180710261,False
+cat__exterior_color_jet black mica,-0.013192940665770786,0.013192940665770786,False
+cat__model_romeo stelvio ti sport,0.012943727575656455,0.012943727575656455,False
+cat__engine_1.4l i4 16v mpfi sohc turbo,-0.012728949887468869,0.012728949887468869,False
+binary__automatic_emergency_braking,-0.012479959985027867,0.012479959985027867,False
+binary__keyless_start,0.01241530909175958,0.01241530909175958,False
+cat__exterior_color_eiger grey,0.012377981067370382,0.012377981067370382,False
+cat__engine_3.5l v6 24v mpfi dohc,-0.012199664192210777,0.012199664192210777,False
+cat__exterior_color_bianco,0.011397617739419484,0.011397617739419484,False
+cat__model_levante s,-0.011286370316476975,0.011286370316476975,False
+cat__exterior_color_ibis white,-0.011156687190885887,0.011156687190885887,False
+cat__interior_color_dark gray,0.01078193886008469,0.01078193886008469,False
+cat__model_countryman cooper,0.010510292513150882,0.010510292513150882,False
+cat__transmission_infrequent_sklearn,0.01033512285707653,0.01033512285707653,False
+cat__interior_color_caramel,0.009936135262861322,0.009936135262861322,False
+cat__exterior_color_soul red crystal metallic,-0.009834290289054705,0.009834290289054705,False
+cat__engine_1.6l i4 16v gdi dohc turbo hybrid,-0.009822364574928386,0.009822364574928386,False
+cat__exterior_color_polar white,-0.00970356568331474,0.00970356568331474,False
+cat__model_telluride sx,0.00964436530247558,0.00964436530247558,False
+cat__model_palisade calligraphy,0.009554829284987361,0.009554829284987361,False
+binary__heated_seats,0.009485448201917764,0.009485448201917764,False
+cat__interior_color_charcoal,-0.009345697783525446,0.009345697783525446,False
+num__missingindicator_avg_mpg,0.009289558993994326,0.009289558993994326,False
+num__avg_mpg,-0.009277995425051819,0.009277995425051819,False
+cat__exterior_color_white,0.009020880865914823,0.009020880865914823,False
+cat__exterior_color_narvik black,-0.008984087855376199,0.008984087855376199,False
+cat__exterior_color_crystal white metallic,0.008192525935052581,0.008192525935052581,False
+cat__exterior_color_gray,-0.00814724892931634,0.00814724892931634,False
+cat__interior_color_global black,0.0075215433408686245,0.0075215433408686245,False
+cat__exterior_color_navarra blue metallic,0.00750729519759656,0.00750729519759656,False
+cat__brand_jaguar,0.007187883763976694,0.007187883763976694,False
+cat__exterior_color_machine gray metallic,-0.007181737495062337,0.007181737495062337,False
+cat__exterior_color_volcano grey metallic,-0.006110325379021718,0.006110325379021718,False
+cat__model_civic lx,-0.005923152738884484,0.005923152738884484,False
+binary__personal_using,-0.005538970613471569,0.005538970613471569,False
+cat__exterior_color_white tri-coat,0.005472487361252336,0.005472487361252336,False
+cat__exterior_color_fuji white,0.00537961434106164,0.00537961434106164,False
+cat__exterior_color_snow white pearl,0.0053065585625476875,0.0053065585625476875,False
+cat__exterior_color_jet black,-0.004604750839979716,0.004604750839979716,False
+cat__interior_color_black / graphite,-0.004470398283244781,0.004470398283244781,False
+cat__interior_color_saddle,0.0042998740191034215,0.0042998740191034215,False
+cat__exterior_color_polaris white,-0.004250789833664323,0.004250789833664323,False
+cat__model_500x pop,-0.004150127705146291,0.004150127705146291,False
+cat__brand_cadillac,-0.00392166824855393,0.00392166824855393,False
+cat__model_titan pro-4x,0.0039053279640472657,0.0039053279640472657,False
+cat__exterior_color_magnetic gray metallic,0.003813852765460361,0.003813852765460361,False
+cat__engine_3.0l v6 24v gdi dohc turbo hybrid,-0.0037106057243150984,0.0037106057243150984,False
+cat__exterior_color_glacier white metallic,0.003688863647546439,0.003688863647546439,False
+cat__model_xt4 premium luxury,0.0036855906423819895,0.0036855906423819895,False
+cat__model_124 spider lusso,0.003280825335190411,0.003280825335190411,False
+cat__exterior_color_brilliant silver,-0.003236608316477779,0.003236608316477779,False
+cat__interior_color_cognac,0.0029495336633115488,0.0029495336633115488,False
+cat__transmission_6-speed automatic,0.0028982956601143815,0.0028982956601143815,False
+cat__interior_color_infrequent_sklearn,-0.0026565260661093825,0.0026565260661093825,False
+cat__interior_color_black,-0.0025838029824832263,0.0025838029824832263,False
+cat__exterior_color_atomic silver,-0.002554149081394899,0.002554149081394899,False
+cat__interior_color_graphite,0.0022969968189508715,0.0022969968189508715,False
+cat__exterior_color_shadow black,-0.0021496581885747687,0.0021496581885747687,False
+cat__exterior_color_deep black pearl effect,-0.0020582628230965817,0.0020582628230965817,False
+cat__exterior_color_bright white clearcoat,0.0015862664743167439,0.0015862664743167439,False
+cat__exterior_color_alfa white,-0.0013420950895533259,0.0013420950895533259,False
+cat__brand_chevrolet,-0.0013229919946370304,0.0013229919946370304,False
+cat__exterior_color_indus silver,-0.0012941792825619269,0.0012941792825619269,False
+cat__exterior_color_ultra white,0.0011476442861053178,0.0011476442861053178,False
+cat__exterior_color_rhodium silver,-0.0011130069592332503,0.0011130069592332503,False
+cat__model_500x trekking,0.0010444486541472807,0.0010444486541472807,False
+cat__model_infrequent_sklearn,0.0006369710579692854,0.0006369710579692854,False
+cat__transmission_9-speed automatic,0.0005937109379986993,0.0005937109379986993,False
+cat__model_mc20 base,0.0005757180956797761,0.0005757180956797761,False
+cat__engine_2.0l i4 16v gdi dohc turbo hybrid,-0.0003880021681549886,0.0003880021681549886,False
+cat__exterior_color_oxford white,0.0002955295547960872,0.0002955295547960872,False
+cat__exterior_color_infrequent_sklearn,0.000197263184004553,0.000197263184004553,False
+cat__exterior_color_orange,-0.0,0.0,True
+cat__exterior_color_silver ice metallic,-0.0,0.0,True
+cat__exterior_color_radiant silver metallic,0.0,0.0,True
+cat__exterior_color_yulong white,0.0,0.0,True
+cat__exterior_color_vesuvio gray metallic,0.0,0.0,True
+cat__exterior_color_velvet red pearlcoat,-0.0,0.0,True
+cat__exterior_color_ultimate black,-0.0,0.0,True
+cat__exterior_color_tourmaline blue metallic,0.0,0.0,True
+cat__exterior_color_thunder gray metallic,0.0,0.0,True
+cat__exterior_color_tan,0.0,0.0,True
+cat__exterior_color_silky silver,0.0,0.0,True
+cat__exterior_color_stromboli gray metallic,0.0,0.0,True
+cat__exterior_color_pure gray,0.0,0.0,True
+cat__exterior_color_portofino gray,0.0,0.0,True
+cat__exterior_color_polymetal gray metallic,0.0,0.0,True
+cat__exterior_color_platinum gray metallic,-0.0,0.0,True
+cat__exterior_color_phantom black,0.0,0.0,True
+cat__exterior_color_pepper white,0.0,0.0,True
+cat__engine_3.0l v6 24v mpfi sohc,-0.0,0.0,True
+cat__model_outlander sel,-0.0,0.0,True
+cat__model_outlander se,-0.0,0.0,True
+cat__model_outlander es,0.0,0.0,True
+cat__model_optima lx,-0.0,0.0,True
+cat__model_mx-5 miata rf grand touring,-0.0,0.0,True
+cat__model_mx-5 miata grand touring,-0.0,0.0,True
+cat__transmission_8-speed automatic with shiftronic,0.0,0.0,True
+cat__transmission_8-speed a/t,-0.0,0.0,True
+cat__transmission_6-speed,0.0,0.0,True
+cat__model_romeo stelvio ti,0.0,0.0,True
+cat__exterior_color_snowflake white pearl mica,0.0,0.0,True
+cat__exterior_color_snowflake white pearl,-0.0,0.0,True
+cat__exterior_color_silverstone gray metallic,0.0,0.0,True
+cat__exterior_color_silver metallic,0.0,0.0,True
+cat__exterior_color_silver lining metallic,0.0,0.0,True
+cat__model_outlander sport se,0.0,0.0,True
+cat__model_outlander sport es,-0.0,0.0,True
+cat__model_outlander sport 2.0 se,0.0,0.0,True
+cat__model_xj xj r-sport,0.0,0.0,True
+cat__model_xc90 t6 momentum 7 passenger,-0.0,0.0,True
+cat__model_xc90 t6 momentum,-0.0,0.0,True
+cat__model_xc40 t5 r-design,-0.0,0.0,True
+cat__model_xc40 t5 momentum,-0.0,0.0,True
+cat__model_wrangler sport,-0.0,0.0,True
+cat__model_v60 cross country t5,-0.0,0.0,True
+cat__engine_1.6l i4 16v gdi dohc hybrid,-0.0,0.0,True
+cat__engine_1.5l i4 16v mpfi dohc hybrid,-0.0,0.0,True
+cat__model_xts luxury,-0.0,0.0,True
+cat__model_xt5 luxury,0.0,0.0,True
+cat__engine_3.5l v6 24v mpfi sohc,0.0,0.0,True
+cat__model_outlander sport 2.0 es,0.0,0.0,True
+cat__interior_color_ash,-0.0,0.0,True
+cat__interior_color_amber,0.0,0.0,True
+cat__drivetrain_infrequent_sklearn,0.0,0.0,True
+cat__model_gx 460 luxury,0.0,0.0,True
+cat__model_granturismo base,0.0,0.0,True
+cat__model_gle 350 base 4matic,0.0,0.0,True
+cat__fuel_type_infrequent_sklearn,-0.0,0.0,True
+cat__transmission_transmission w/dual shift mode,-0.0,0.0,True
+cat__transmission_automatic 8-speed,-0.0,0.0,True
+cat__transmission_automatic 6-speed,-0.0,0.0,True
+cat__model_k5 gt-line,-0.0,0.0,True
+cat__model_is 350 f sport,-0.0,0.0,True
+cat__model_id.4 pro s,-0.0,0.0,True
+cat__model_highlander xle,-0.0,0.0,True
+cat__model_palisade limited,0.0,0.0,True
+cat__model_rogue sv,-0.0,0.0,True
+cat__model_q7 55 premium plus,-0.0,0.0,True
+cat__model_pilot ex-l,0.0,0.0,True
+cat__model_pathfinder sv,-0.0,0.0,True
+cat__model_pathfinder sl,-0.0,0.0,True
+cat__model_pathfinder platinum,-0.0,0.0,True
+cat__model_passport ex-l,-0.0,0.0,True
+cat__engine_electric,-0.0,0.0,True
+cat__model_sonata se,-0.0,0.0,True
+cat__model_silverado 1500 lt,0.0,0.0,True
+cat__model_sentra sv,-0.0,0.0,True
+cat__model_se hardtop cooper,-0.0,0.0,True
+cat__model_santa fe sport 2.4l,0.0,0.0,True
+cat__model_rx 350 base,0.0,0.0,True
+cat__model_rx 350 350,0.0,0.0,True
+cat__interior_color_beige,-0.0,0.0,True
+cat__model_e-pace se,-0.0,0.0,True
+cat__model_cx-9 touring,-0.0,0.0,True
+cat__interior_color_ebony / ebony,-0.0,0.0,True
+cat__interior_color_dark charcoal,0.0,0.0,True
+cat__interior_color_dark brown,0.0,0.0,True
+cat__interior_color_cuoio,0.0,0.0,True
+cat__interior_color_cream,-0.0,0.0,True
+cat__interior_color_cirrus,0.0,0.0,True
+cat__interior_color_chocolate,0.0,0.0,True
+cat__interior_color_chateau,-0.0,0.0,True
+cat__interior_color_canberra beige,-0.0,0.0,True
+cat__interior_color_blond,0.0,0.0,True
+cat__interior_color_black pearl,0.0,0.0,True
+cat__interior_color_black onyx,0.0,0.0,True
+cat__interior_color_black / gray,-0.0,0.0,True
+cat__model_romeo stelvio sport,-0.0,0.0,True
+cat__interior_color_jet black,-0.0,0.0,True
+cat__interior_color_jet,-0.0,0.0,True
+cat__interior_color_ivory white,-0.0,0.0,True
+cat__interior_color_ivory,0.0,0.0,True
+cat__interior_color_gray / black,-0.0,0.0,True
+cat__interior_color_ecru,0.0,0.0,True
+cat__model_f-pace 25t prestige,0.0,0.0,True
+cat__model_f-pace 25t premium,0.0,0.0,True
+cat__model_explorer xlt,-0.0,0.0,True
+cat__model_expedition max xlt,0.0,0.0,True
+cat__model_expedition max limited,-0.0,0.0,True
+cat__model_expedition limited,-0.0,0.0,True
+cat__model_escalade premium luxury,0.0,0.0,True
+cat__model_es 350 base,0.0,0.0,True
+cat__model_elantra se,-0.0,0.0,True
+cat__model_eclipse cross es,0.0,0.0,True
+cat__model_cooper s countryman base,-0.0,0.0,True
+cat__interior_color_sand,-0.0,0.0,True
+cat__interior_color_sabbia,-0.0,0.0,True
+cat__interior_color_rosso,-0.0,0.0,True
+cat__interior_color_rioja red,-0.0,0.0,True
+cat__interior_color_pearl beige,0.0,0.0,True
+cat__interior_color_okapi brown,-0.0,0.0,True
+cat__interior_color_nero (black),-0.0,0.0,True
+cat__interior_color_nero,0.0,0.0,True
+cat__interior_color_mocha,-0.0,0.0,True
+cat__interior_color_medium pewter,0.0,0.0,True
+cat__interior_color_medium earth gray,-0.0,0.0,True
+cat__interior_color_macchiato beige,0.0,0.0,True
+cat__interior_color_light platinum / jet black,-0.0,0.0,True
+cat__interior_color_light oyster / ebony,0.0,0.0,True
+cat__interior_color_light oyster,-0.0,0.0,True
+cat__exterior_color_alloy silver metallic,0.0,0.0,True
+cat__exterior_color_alfa black,-0.0,0.0,True
+cat__interior_color_white,-0.0,0.0,True
+cat__interior_color_titan black / quarzit,0.0,0.0,True
+cat__interior_color_tan,-0.0,0.0,True
+cat__interior_color_steel gray,0.0,0.0,True
+cat__interior_color_sport,-0.0,0.0,True
+cat__interior_color_slate gray,0.0,0.0,True
+cat__interior_color_shara beige,-0.0,0.0,True
+cat__interior_color_sepia,0.0,0.0,True
+cat__interior_color_sand beige,0.0,0.0,True
+cat__model_cx-9 grand touring,-0.0,0.0,True
+cat__model_ct5 premium luxury awd,-0.0,0.0,True
+cat__model_cr-v lx,-0.0,0.0,True
+cat__model_cr-v ex,-0.0,0.0,True
+cat__model_countryman cooper all4,-0.0,0.0,True
+cat__exterior_color_carbon black metallic,-0.0,0.0,True
+cat__exterior_color_burgundy,0.0,0.0,True
+cat__exterior_color_british racing green,0.0,0.0,True
+cat__exterior_color_bright silver metallic,-0.0,0.0,True
+cat__exterior_color_blue metallic,-0.0,0.0,True
+cat__exterior_color_blu,-0.0,0.0,True
+cat__exterior_color_blizzard pearl,0.0,0.0,True
+cat__exterior_color_black stone,-0.0,0.0,True
+cat__exterior_color_black sapphire metallic,0.0,0.0,True
+cat__exterior_color_black raven,0.0,0.0,True
+cat__exterior_color_black noir pearl,-0.0,0.0,True
+cat__exterior_color_black clearcoat,-0.0,0.0,True
+cat__exterior_color_black,-0.0,0.0,True
+cat__exterior_color_billet silver metallic clearcoat,0.0,0.0,True
+cat__exterior_color_bianco gelato white,0.0,0.0,True
+cat__exterior_color_aurora black,0.0,0.0,True
+cat__exterior_color_ebony black,-0.0,0.0,True
+cat__exterior_color_ebony,-0.0,0.0,True
+cat__exterior_color_dolomite silver metallic,-0.0,0.0,True
+cat__exterior_color_diamond red,-0.0,0.0,True
+cat__exterior_color_diamond black,-0.0,0.0,True
+cat__exterior_color_denim blue metallic,0.0,0.0,True
+cat__exterior_color_deep crystal blue mica,-0.0,0.0,True
+cat__exterior_color_crystal white pearl metallic,0.0,0.0,True
+cat__exterior_color_corris grey,-0.0,0.0,True
+cat__exterior_color_classic silver metallic,0.0,0.0,True
+cat__exterior_color_chili pepper red,-0.0,0.0,True
+cat__exterior_color_celestial silver metallic,-0.0,0.0,True
+cat__exterior_color_caviar,-0.0,0.0,True
+cat__exterior_color_carrara white metallic,0.0,0.0,True
+cat__exterior_color_carrara white,-0.0,0.0,True
+cat__exterior_color_carpathian grey,0.0,0.0,True
+cat__model_tucson se,0.0,0.0,True
+cat__model_titan sv,0.0,0.0,True
+cat__model_tiguan 2.0t se,-0.0,0.0,True
+cat__model_telluride ex,0.0,0.0,True
+cat__model_tahoe z71,0.0,0.0,True
+cat__model_tahoe lt,0.0,0.0,True
+cat__model_suburban z71,0.0,0.0,True
+cat__model_suburban lt,0.0,0.0,True
+cat__model_stinger gt2,0.0,0.0,True
+cat__model_stinger gt-line,0.0,0.0,True
+cat__engine_4.7l v8 32v gdi dohc twin turbo,-0.0,0.0,True
+"cat__engine_3l v-6 gasoline direct injection, dohc, variable valve control,",0.0,0.0,True
+cat__engine_3.6l v6 24v gdi dohc twin turbo,0.0,0.0,True
+cat__model_armada platinum,0.0,0.0,True
+cat__model_accord lx,-0.0,0.0,True
+cat__model_accord ex-l,0.0,0.0,True
+cat__exterior_color_hyper white,0.0,0.0,True
+cat__exterior_color_gun metallic,0.0,0.0,True
+cat__exterior_color_gravity gray,-0.0,0.0,True
+cat__exterior_color_granite crystal clearcoat metallic,-0.0,0.0,True
+cat__exterior_color_granite crystal,-0.0,0.0,True
+cat__exterior_color_glacier silver metallic,-0.0,0.0,True
+cat__exterior_color_glacial white pearl,-0.0,0.0,True
+cat__exterior_color_florett silver metallic,-0.0,0.0,True
+cat__exterior_color_firenze red,0.0,0.0,True
+cat__exterior_color_eminent white pearl,-0.0,0.0,True
+cat__model_clubman cooper s all4,0.0,0.0,True
+cat__model_civic sport,-0.0,0.0,True
+cat__model_civic ex,0.0,0.0,True
+cat__model_armada sv,-0.0,0.0,True
+cat__model_rover range rover sport 3.0l supercharged hse,-0.0,0.0,True
+cat__model_tucson sel,-0.0,0.0,True
+cat__exterior_color_mineral gray metallic,-0.0,0.0,True
+cat__exterior_color_midnight black metallic,0.0,0.0,True
+cat__exterior_color_midnight black,-0.0,0.0,True
+cat__exterior_color_metallic,0.0,0.0,True
+cat__exterior_color_metal,0.0,0.0,True
+cat__exterior_color_mercury gray metallic,-0.0,0.0,True
+cat__exterior_color_magnetic metallic,-0.0,0.0,True
+cat__exterior_color_magnetic black,-0.0,0.0,True
+cat__exterior_color_lunar silver metallic,-0.0,0.0,True
+cat__exterior_color_loire blue,-0.0,0.0,True
+cat__exterior_color_light white,0.0,0.0,True
+cat__exterior_color_labrador black pearl,-0.0,0.0,True
+cat__exterior_color_labrador black metallic,-0.0,0.0,True
+cat__exterior_color_jet black metallic,-0.0,0.0,True
+cat__exterior_color_ice white,-0.0,0.0,True
+cat__exterior_color_hypnotique red,0.0,0.0,True
+cat__exterior_color_onyx black,0.0,0.0,True
+cat__exterior_color_obsidian black,0.0,0.0,True
+cat__exterior_color_nero ribelle metallic,0.0,0.0,True
+cat__exterior_color_nebula gray pearl,-0.0,0.0,True
+cat__brand_honda,0.0,0.0,True
+cat__model_500x lounge,0.0,0.0,True
+cat__model_500c pop,-0.0,0.0,True
+cat__model_500 lounge,-0.0,0.0,True
+cat__model_500 abarth,0.0,0.0,True
+cat__model_4runner sr5,0.0,0.0,True
+cat__model_124 spider classica,0.0,0.0,True
+cat__exterior_color_moonwalk gray metallic,0.0,0.0,True
+cat__exterior_color_moonlight blue metallic,-0.0,0.0,True
+cat__exterior_color_montecarlo blue metallic,-0.0,0.0,True
+cat__exterior_color_misano blue metallic,0.0,0.0,True
+cat__exterior_color_mineral white metallic,0.0,0.0,True
+cat__exterior_color_quartz white,0.0,0.0,True
+cat__exterior_color_pyrite silver metallic,-0.0,0.0,True
+cat__engine_2.5l i4 16v mpfi dohc,-0.0,0.0,True
+cat__engine_2.5l i4 16v gdi dohc,-0.0,0.0,True
+cat__engine_2.5l i4 16v,0.0,0.0,True
+cat__engine_2.5l h4 16v gdi dohc turbo,0.0,0.0,True
+cat__engine_2.5l,0.0,0.0,True
+cat__engine_2.4l i4 16v mpfi sohc,0.0,0.0,True
+cat__engine_2.4l i4 16v mpfi dohc hybrid,0.0,0.0,True
+cat__engine_2.0l i4 16v mpfi dohc hybrid,-0.0,0.0,True
+cat__exterior_color_super white,0.0,0.0,True
+cat__exterior_color_white silver metallic,0.0,0.0,True
+cat__exterior_color_starfire pearl,0.0,0.0,True
+cat__engine_1.8l i4 16v mpfi dohc hybrid,0.0,0.0,True
+cat__exterior_color_osmium gray metallic,0.0,0.0,True
+cat__exterior_color_wolf gray,0.0,0.0,True
+cat__engine_3.0l v6 24v gdi dohc turbo,0.0,0.0,True
+cat__exterior_color_selenite gray metallic,0.0,0.0,True
+cat__exterior_color_satin steel metallic,0.0,0.0,True
+cat__engine_2.0l i4 16v gdi dohc,0.0,0.0,True
+binary__automatic_transmission,0.0,0.0,True
+cat__engine_3.0l v6 24v gdi dohc supercharged,-0.0,0.0,True
+cat__engine_3.0l v6 24v ddi dohc turbo diesel,-0.0,0.0,True
+cat__engine_3.0l v6,0.0,0.0,True
+"cat__engine_2l i-4 dohc, mivec variable valve control, engine with 148hp",-0.0,0.0,True
+cat__engine_2.7l v6 24v pdi dohc twin turbo,-0.0,0.0,True
+cat__exterior_color_white diamond tri-coat,-0.0,0.0,True
+cat__exterior_color_pure white,-0.0,0.0,True
+cat__exterior_color_wind chill pearl,-0.0,0.0,True
+cat__exterior_color_rosso,0.0,0.0,True
+cat__exterior_color_rally red metallic,0.0,0.0,True
+cat__exterior_color_vulcano black metallic,-0.0,0.0,True

@@ -1,0 +1,8 @@
+{
+  "residual_mean": 1019.982083196775,
+  "residual_std": 13906.61476049489,
+  "residual_skew": 8.132469763145549,
+  "residual_kurtosis": 113.30684197126139,
+  "fitted_abs_residual_correlation": 0.40872037107022,
+  "interpretation": "A fitted-vs-absolute-residual correlation far from zero suggests non-constant error variance."
+}

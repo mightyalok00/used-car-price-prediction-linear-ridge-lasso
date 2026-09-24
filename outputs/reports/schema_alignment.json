@@ -1,0 +1,6 @@
+{
+  "same_column_order": true,
+  "train_only": [],
+  "test_only": [],
+  "behavior": "All predictors align."
+}

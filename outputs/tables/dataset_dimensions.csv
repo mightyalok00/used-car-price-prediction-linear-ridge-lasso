@@ -1,0 +1,3 @@
+dataset,rows,columns,total_cells,shape_formula,memory_bytes,duplicate_rows
+train.csv,19109,36,687924,rows = df.shape[0]; columns = df.shape[1]; total cells = rows * columns,7712586,0
+test.csv,4778,36,172008,rows = df.shape[0]; columns = df.shape[1]; total cells = rows * columns,1928694,0

@@ -1,0 +1,34 @@
+{
+  "train": {
+    "raw_rows": 19109,
+    "duplicate_rows_removed": 0,
+    "invalid_or_missing_target_rows_removed": 34,
+    "clean_rows": 19075,
+    "reference_year_for_vehicle_age": 2024,
+    "invalid_values_set_to_missing": {
+      "year": 0,
+      "mileage": 0,
+      "engine_size": 14,
+      "min_mpg": 179,
+      "max_mpg": 89
+    },
+    "remaining_missing_values": 12775,
+    "note": "Remaining predictor gaps are imputed inside leakage-safe pipelines fit only on training data."
+  },
+  "test": {
+    "raw_rows": 4778,
+    "duplicate_rows_removed": 0,
+    "invalid_or_missing_target_rows_removed": 10,
+    "clean_rows": 4768,
+    "reference_year_for_vehicle_age": 2024,
+    "invalid_values_set_to_missing": {
+      "year": 0,
+      "mileage": 0,
+      "engine_size": 1,
+      "min_mpg": 48,
+      "max_mpg": 22
+    },
+    "remaining_missing_values": 3210,
+    "note": "Remaining predictor gaps are imputed inside leakage-safe pipelines fit only on training data."
+  }
+}
