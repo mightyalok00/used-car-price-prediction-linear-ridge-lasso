@@ -11,7 +11,7 @@ class ProjectConfig:
     test_path: Path = Path(r"D:\Used Car Listings Features and Price Prediction\test.csv")
     target: str = "price"
     random_state: int = 42
-    cv_folds: int = 3
+    cv_folds: int = 5
     one_hot_min_frequency: int = 20
     # Single-process fitting avoids Windows joblib worker exhaustion on modest machines.
     n_jobs: int = 1
