@@ -1,105 +1,212 @@
-# Used Car Listings: Features and Price Prediction
+# Used Car Price Prediction — Linear, Ridge & Lasso
 
-An end-to-end, reproducible machine-learning portfolio project for used-car valuation. It compares Multiple Linear Regression, Ridge, and Lasso on real listing data, then converts model output into practical dealership insights for valuation, inventory selection, depreciation, and pricing opportunities.
+![Python](https://img.shields.io/badge/Python-3.14.7-blue)
+![scikit-learn](https://img.shields.io/badge/scikit--learn-1.9.0-orange)
+![Status](https://img.shields.io/badge/status-complete-brightgreen)
+![Questions](https://img.shields.io/badge/questions-16%2F16-success)
 
-## Project highlights
+An end-to-end machine-learning portfolio project for **used-car valuation** using Multiple Linear Regression, Ridge Regression, and Lasso Regression. The project combines schema-aware cleaning, leakage-safe preprocessing, cross-validation, model diagnostics, and dealership-focused business analysis.
 
-- Answers all 16 analysis questions in one fully executed notebook.
-- Inspects the actual train/test schemas instead of assuming columns.
-- Uses leakage-safe imputation, scaling, rare-category handling, and one-hot encoding.
-- Tunes Ridge and Lasso with `GridSearchCV` and evaluates all models with consistent cross-validation.
-- Reports MAE, MSE, RMSE, R², CV stability, train/test fit, coefficient activity, and generalization gaps.
-- Produces reusable Python modules, fitted-model artifacts, figures, business tables, and validation reports.
-- Identifies potentially underpriced and overpriced listings while documenting decision risks and limitations.
+## Portfolio snapshot
+
+| Item | Result |
+| --- | --- |
+| Dataset | Used Car Listings: Features and Price Prediction |
+| Training data | 19,109 rows × 36 columns |
+| External test data | 4,778 rows × 36 columns |
+| Models | Linear Regression, Ridge, Lasso |
+| Best external-test RMSE | **Ridge Regression — 13,942** |
+| Best external-test R² | **Ridge Regression — 0.7322** |
+| Lasso feature reduction | **273 coefficients set to zero** |
+| Potentially underpriced listings | **565** |
+| Potentially overpriced listings | **693** |
+| Assignment coverage | **16 / 16 questions answered** |
+
+## Key findings & business impact
+
+- **Ridge Regression** produced the lowest external-test RMSE, narrowly outperforming the unregularized baseline.
+- **Mileage** has one of the strongest negative relationships with price; vehicle age is also negatively associated with value.
+- **Lasso** reduced the encoded feature set from 630 active coefficients to 357 by shrinking **273 coefficients to exactly zero**.
+- The pricing screen flagged **565 potentially underpriced** and **693 potentially overpriced** listings using a ±20% rule.
+- The outputs can support first-pass **vehicle valuation, trade-in negotiation, inventory acquisition, depreciation analysis, and listing-price review**.
+- Pricing flags are screening signals only; inspection, local comparables, title/service history, geography, seller type, and market demand should still be considered.
 
 ## Model results
 
 | Model | Test MAE | Test RMSE | Test R² | Best alpha | Active features | Zero coefficients |
 | --- | ---: | ---: | ---: | ---: | ---: | ---: |
 | Linear Regression | 5,898 | 13,943 | 0.7322 | N/A | 630 | 0 |
-| Ridge Regression | 5,904 | 13,942 | 0.7322 | 0.1 | 630 | 0 |
+| **Ridge Regression** | 5,904 | **13,942** | **0.7322** | 0.1 | 630 | 0 |
 | Lasso Regression | 5,987 | 14,103 | 0.7260 | 0.0001 | 357 | 273 |
 
-Ridge produced the lowest external-test RMSE, narrowly outperforming the unregularized baseline. Lasso delivered a smaller model by setting 273 encoded coefficients to zero, with a modest reduction in predictive accuracy.
+> Ridge has the lowest external-test RMSE. The difference from Linear Regression is small, so this is a narrow performance edge rather than a large practical gap.
+
+## EDA highlights
+
+### Price distribution and log transformation
+
+![Price distribution and log transformation](outputs/figures/price_distribution_and_log.png)
+
+### Numerical features vs price
+
+![Numerical features vs price](outputs/figures/numeric_features_vs_price.png)
+
+### Linear Regression residual diagnostics
+
+![Linear Regression residual diagnostics](outputs/figures/linear_regression_residuals.png)
+
+The generated tables provide deeper EDA coverage for categorical pricing, outliers, depreciation, segment value retention, correlations, model coefficients, and pricing opportunities.
+
+## All 16 questions covered
+
+The full assignment is documented in [docs/questions.md](docs/questions.md), and the executed notebook answers **Q1 through Q16**:
+
+1. Dataset understanding and data structures
+2. Data quality and cleaning
+3. Feature classification and selection
+4. Price distribution and outlier analysis
+5. Numerical features vs price
+6. Categorical features vs price
+7. Encoding, scaling, and leakage prevention
+8. Baseline Multiple Linear Regression
+9. Linear Regression interpretation and diagnostics
+10. Ridge Regression and alpha tuning
+11. Lasso Regression and feature selection
+12. Cross-validation of all three models
+13. Comprehensive Linear vs Ridge vs Lasso comparison
+14. Vehicle valuation business analysis
+15. Depreciation and inventory strategy
+16. Pricing strategy and opportunities
+
+## Reproducibility
+
+The committed results were produced with the environment recorded in [outputs/reports/run_metadata.json](outputs/reports/run_metadata.json):
+
+- **Python:** 3.14.7
+- **pandas:** 3.0.5
+- **NumPy:** 2.5.2
+- **scikit-learn:** 1.9.0
+- **Random state:** 42
+- **Cross-validation folds:** 3
+- **Recorded platform:** Windows 11
+
+### Reproducibility checklist
+
+- [x] Environment versions recorded
+- [x] Random state recorded
+- [x] Source train/test dimensions recorded
+- [x] Raw source files are never overwritten
+- [x] Leakage-safe preprocessing fitted only on training folds
+- [x] External labeled test set kept separate from training
+- [x] Generated tables, figures, diagnostics, and summaries committed
+- [x] Lightweight tests included
+- [x] Command-line workflow included
 
 ## Verified source dimensions
 
-Pandas returns `(rows, columns)` from `df.shape`:
+- Raw train: **19,109 rows × 36 columns = 687,924 cells**
+- Raw test: **4,778 rows × 36 columns = 172,008 cells**
 
-```python
-rows = df.shape[0]
-columns = df.shape[1]
-total_cells = rows * columns
-```
-
-- Raw train: 19,109 rows × 36 columns = 687,924 cells.
-- Raw test: 4,778 rows × 36 columns = 172,008 cells.
-
-These counts include rows with unusable targets. Cleaning removes 34 train rows (32 nonnumeric `ot Priced` values and 2 missing prices) and 10 test rows (9 nonnumeric `ot Priced` values and 1 missing price). Generated reports preserve both raw and clean counts.
+Cleaning removes 34 train rows and 10 test rows with unusable target values. Predictor gaps are handled inside leakage-safe preprocessing pipelines.
 
 ## Project structure
 
-```text
-Used_Car_Price_Prediction_Project/
-├── README.md
-├── requirements.txt
-├── data/raw/README.md
-├── docs/
-│   ├── questions.md
-│   └── methodology.md
-├── notebooks/
-│   └── 01_complete_used_car_analysis.ipynb
-├── scripts/
-│   ├── build_notebook.py
-│   └── run_analysis.py
-├── src/
-│   ├── config.py
-│   ├── data.py
-│   ├── modeling.py
-│   ├── reporting.py
-│   └── workflow.py
-├── tests/test_data.py
-└── outputs/
-    ├── figures/
-    ├── tables/
-    ├── models/
-    └── reports/
-```
+    Used_Car_Price_Prediction_Project/
+    ├── README.md
+    ├── requirements.txt
+    ├── data/raw/README.md
+    ├── docs/
+    │   ├── questions.md
+    │   └── methodology.md
+    ├── notebooks/
+    │   └── 01_complete_used_car_analysis.ipynb
+    ├── scripts/
+    │   ├── build_notebook.py
+    │   └── run_analysis.py
+    ├── src/
+    │   ├── __init__.py
+    │   ├── config.py
+    │   ├── data.py
+    │   ├── modeling.py
+    │   ├── reporting.py
+    │   └── workflow.py
+    ├── tests/test_data.py
+    └── outputs/
+        ├── figures/
+        ├── tables/
+        ├── models/
+        └── reports/
 
-## Run order
+## Run the project
 
-1. Open PowerShell in the project root.
-2. Create and activate an environment, then install dependencies:
+### 1. Clone
 
-   ```powershell
-   python -m venv .venv
-   .\.venv\Scripts\Activate.ps1
-   python -m pip install -r requirements.txt
-   ```
+    git clone https://github.com/mightyalok00/used-car-price-prediction-linear-ridge-lasso.git
+    cd used-car-price-prediction-linear-ridge-lasso
 
-3. Confirm the source files exist at the default paths shown in `data/raw/README.md`.
-4. Run either the notebook or the command-line workflow:
+### 2. Create the environment
 
-   ```powershell
-   jupyter notebook notebooks\01_complete_used_car_analysis.ipynb
-   ```
+    python -m venv .venv
+    .\.venv\Scripts\Activate.ps1
+    python -m pip install --upgrade pip
+    python -m pip install -r requirements.txt
 
-   or
+### 3. Provide the source CSV files
 
-   ```powershell
-   python scripts\run_analysis.py
-   ```
+Recorded source paths:
 
-5. Review `outputs/reports/analysis_summary.md`, `outputs/tables/model_comparison.csv`, and the generated figures and business tables.
-6. Optionally run the lightweight tests:
+    D:\Used Car Listings Features and Price Prediction\train.csv
+    D:\Used Car Listings Features and Price Prediction\test.csv
 
-   ```powershell
-   python -m pytest -q
-   ```
+Or pass custom locations:
+
+    python scripts\run_analysis.py --train "D:\path\to\train.csv" --test "D:\path\to\test.csv"
+
+### 4. Run the full analysis
+
+    python scripts\run_analysis.py
+
+Or open the executed notebook:
+
+    jupyter notebook notebooks\01_complete_used_car_analysis.ipynb
+
+### 5. Run tests
+
+    python -m pytest -q
+
+### 6. Review the most useful outputs
+
+- [Analysis summary](outputs/reports/analysis_summary.md)
+- [Model comparison](outputs/tables/model_comparison.csv)
+- [Depreciation by age band](outputs/tables/depreciation_by_age_band.csv)
+- [Segment value retention](outputs/tables/segment_value_retention.csv)
+- [Top potentially underpriced listings](outputs/tables/top_100_potentially_underpriced.csv)
+- [Top potentially overpriced listings](outputs/tables/top_100_potentially_overpriced.csv)
+
+## Methodology
+
+The models learn **log1p(price)** to reduce target skew. Predictions are converted back to price units before MAE, MSE, RMSE, and R² are calculated.
+
+The preprocessing pipeline:
+
+- imputes missing numerical values
+- handles missing categorical values
+- scales continuous variables
+- groups rare categorical levels
+- one-hot encodes categorical features
+- handles unseen test categories safely
+- prevents test information from leaking into training
+
+See [docs/methodology.md](docs/methodology.md) for the full methodology.
 
 ## Important interpretation notes
 
-- The supplied test file includes `price`, so it is used as a labeled external holdout rather than being mixed into training.
-- The models learn a log-price target, then convert predictions back to price units before calculating MAE, MSE, RMSE, and R².
-- Rare categorical levels are grouped, and unseen test categories are handled safely.
-- Underpriced/overpriced labels are screening signals. They require vehicle inspection and local-market validation.
+- The supplied test file contains price, so it is treated as a **labeled external holdout** rather than mixed into training.
+- Coefficients describe model associations, not causal effects.
+- The test set appears easier than the training CV folds, so external-test performance should be interpreted alongside CV results.
+- Extreme prices remain in the analysis; log-target training reduces their influence but does not eliminate large-dollar residuals.
+- Underpriced/overpriced labels require vehicle inspection and local-market validation before any business decision.
+
+## Repository purpose
+
+This project is designed as a **Data Science / Machine Learning portfolio project** demonstrating regression modeling, model comparison, reproducible analysis, and business interpretation rather than only model training.
