@@ -1,14 +1,16 @@
-"""Deterministic checks for cleaning, EDA summaries, diagnostics, and pricing logic."""
+"""Deterministic checks for cleaning, preprocessing, diagnostics, metrics, and pricing logic."""
 
 import numpy as np
 import pandas as pd
 from sklearn.linear_model import Ridge
 
-from src.data import clean_dataset, inspect_dataset
+from src.data import align_feature_columns, clean_dataset, inspect_dataset
 from src.modeling import (
     build_preprocessor,
     make_pipeline,
     numeric_multicollinearity_diagnostics,
+    predict_price,
+    regression_metrics,
     ridge_coefficient_path,
     select_model_features,
 )
@@ -32,6 +34,14 @@ def test_cleaning_removes_invalid_target_and_adds_age() -> None:
     assert summary["invalid_or_missing_target_rows_removed"] == 1
 
 
+def test_align_feature_columns_uses_only_shared_predictors() -> None:
+    train = pd.DataFrame({"a": [1], "b": [2], "price": [100]})
+    test = pd.DataFrame({"a": [3], "c": [4], "price": [110]})
+    train_x, test_x = align_feature_columns(train, test, "price")
+    assert list(train_x.columns) == ["a"]
+    assert list(test_x.columns) == ["a"]
+
+
 def test_categorical_summary_includes_binary_features() -> None:
     frame = pd.DataFrame(
         {
@@ -49,6 +59,42 @@ def test_multicollinearity_detects_perfect_numeric_relation() -> None:
     vif, summary = numeric_multicollinearity_diagnostics(x)
     assert np.isinf(vif.loc[vif["feature"] == "a", "vif"]).iloc[0]
     assert summary["features_vif_gt_10"] >= 2
+
+
+def test_regression_metrics_match_known_values() -> None:
+    y_true = np.array([10.0, 20.0])
+    y_pred = np.array([12.0, 18.0])
+    metrics = regression_metrics(y_true, y_pred)
+    assert metrics["MAE"] == 2.0
+    assert metrics["MSE"] == 4.0
+    assert metrics["RMSE"] == 2.0
+
+
+def test_preprocessing_handles_unseen_category() -> None:
+    x = pd.DataFrame(
+        {
+            "mileage": [10_000, 20_000, 30_000, 40_000],
+            "brand": ["a", "a", "b", "b"],
+        }
+    )
+    y = pd.Series([20_000, 18_000, 16_000, 14_000], dtype=float)
+    model_x, groups = select_model_features(x)
+    pipeline = make_pipeline(build_preprocessor(groups, min_frequency=1), Ridge(alpha=1.0, solver="lsqr"))
+    fitted = pipeline.fit(model_x, np.log1p(y))
+    unseen = pd.DataFrame({"mileage": [25_000], "brand": ["never_seen_before"]})
+    prediction = predict_price(fitted, unseen)
+    assert prediction.shape == (1,)
+    assert np.isfinite(prediction).all()
+
+
+def test_predict_price_clips_negative_values_to_zero() -> None:
+    class FakeModel:
+        def predict(self, x):
+            return np.array([-10.0, 0.0, 1.0])
+
+    prediction = predict_price(FakeModel(), pd.DataFrame({"x": [1, 2, 3]}))
+    assert (prediction >= 0).all()
+    assert prediction[0] == 0.0
 
 
 def test_ridge_coefficient_path_reports_each_alpha() -> None:
