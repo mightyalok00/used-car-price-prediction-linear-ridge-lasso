@@ -11,7 +11,7 @@ from sklearn.base import clone
 from sklearn.compose import ColumnTransformer
 from sklearn.impute import SimpleImputer
 from sklearn.linear_model import Lasso, LinearRegression, Ridge
-from sklearn.metrics import make_scorer, mean_absolute_error, mean_squared_error, r2_score
+from sklearn.metrics import make_scorer, mean_absolute_error, median_absolute_error, mean_squared_error, r2_score
 from sklearn.model_selection import GridSearchCV, StratifiedKFold
 from sklearn.pipeline import Pipeline
 from sklearn.preprocessing import OneHotEncoder, StandardScaler
@@ -154,6 +154,7 @@ def predict_price(fitted: Pipeline, X: pd.DataFrame) -> np.ndarray:
 def regression_metrics(y_true: pd.Series | np.ndarray, y_pred: np.ndarray) -> dict[str, float]:
     return {
         "MAE": float(mean_absolute_error(y_true, y_pred)),
+        "MedianAE": float(median_absolute_error(y_true, y_pred)),
         "MSE": float(mean_squared_error(y_true, y_pred)),
         "RMSE": float(np.sqrt(mean_squared_error(y_true, y_pred))),
         "R2": float(r2_score(y_true, y_pred)),
@@ -164,7 +165,7 @@ def cross_validate_price(
     pipeline: Pipeline,
     X: pd.DataFrame,
     y: pd.Series,
-    cv: KFold,
+    cv: list[tuple[np.ndarray, np.ndarray]],
 ) -> tuple[float, float, list[float]]:
     """Evaluate every fold on original-dollar RMSE, despite log-target training."""
     scores: list[float] = []
@@ -183,7 +184,7 @@ def fit_and_evaluate(
     y_train: pd.Series,
     X_test: pd.DataFrame,
     y_test: pd.Series,
-    cv: KFold,
+    cv: list[tuple[np.ndarray, np.ndarray]],
     best_alpha: float | None,
 ) -> tuple[Pipeline, dict[str, Any], np.ndarray, np.ndarray]:
     start = time.perf_counter()
