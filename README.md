@@ -243,7 +243,7 @@ Or open the executed notebook:
 
 ## 🧪 Methodology
 
-The models learn **log1p(price)** to reduce target skew. Predictions are converted back to price units before MAE, MSE, RMSE, and R² are calculated.
+The models learn **log1p(price)** to reduce target skew. Predictions are converted back to price units before MAE, Median Absolute Error (MedianAE), MSE, RMSE, and R² are calculated.
 
 The preprocessing pipeline:
 
@@ -263,7 +263,17 @@ See [docs/methodology.md](docs/methodology.md) for the full methodology.
 - Coefficients describe model associations, not causal effects.
 - The test set appears easier than the training CV folds, so external-test performance should be interpreted alongside CV results.
 - Extreme prices remain in the analysis; log-target training reduces their influence but does not eliminate large-dollar residuals.
+- **MedianAE is reported alongside RMSE** as a more robust error measure because RMSE is especially sensitive to a few ultra-expensive vehicles.
 - Underpriced/overpriced labels require vehicle inspection and local-market validation before any business decision.
+
+## 🚧 Limitations & Future Work
+
+- A small number of ultra-expensive vehicles still create large squared errors, so fold RMSE can vary even after price-stratified cross-validation.
+- The external test set appears easier than the CV folds, so both holdout and cross-validation results should be considered together.
+- Important real-world pricing variables such as trim, geography, service/title history, seller type, reconditioning cost, negotiation, and local demand are not fully represented.
+- Pricing flags are screening signals, not guaranteed buy/sell recommendations.
+- The current models provide **point predictions only**. A strong future extension would add calibrated prediction intervals or conformal prediction so each valuation includes an uncertainty range.
+- Further nonlinear or robust regression models could be explored later, provided they use the same leakage-safe evaluation design.
 
 ## 🏷️ Repository topics
 
