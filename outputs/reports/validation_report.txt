@@ -7,3 +7,5 @@ Models evaluated: Linear Regression, Ridge Regression, Lasso Regression
 Best external-test RMSE model: Ridge Regression
 Required output files checked: 5
 No source CSV was copied or modified.
+
+CORRECTNESS UPGRADE NOTE: The source workflow was expanded after this recorded run to add binary-category price analysis, measured multicollinearity diagnostics, Ridge coefficient-path analysis, multi-segment retention analysis, and original-price RMSE alpha tuning. Re-run `python scripts/run_analysis.py` with the source CSVs to regenerate all outputs under the upgraded workflow.
