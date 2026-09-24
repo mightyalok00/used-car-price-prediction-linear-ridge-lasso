@@ -118,6 +118,7 @@ def test_regression_metrics_known_values() -> None:
     y_pred = np.array([12.0, 18.0])
     metrics = regression_metrics(y_true, y_pred)
     assert metrics["MAE"] == 2.0
+    assert metrics["MedianAE"] == 2.0
     assert metrics["MSE"] == 4.0
     assert metrics["RMSE"] == 2.0
     assert np.isclose(metrics["R2"], 0.84)
