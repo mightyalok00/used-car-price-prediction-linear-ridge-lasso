@@ -48,8 +48,21 @@ The source train file is used for training and cross-validation. The source test
 - A shuffled, seeded three-fold strategy is used consistently for tuning and model comparison.
 - Model fitting defaults to one process for reliable execution on Windows; this changes runtime, not results.
 - Alpha tuning uses `GridSearchCV` on log-target RMSE. Final CV mean and standard deviation are computed as RMSE in original price units.
+- Ridge coefficient magnitude is also summarized across every candidate alpha so shrinkage is measured, not merely described.
+- Numeric multicollinearity is measured with VIF-style diagnostics and a condition number. These diagnostics supplement, rather than replace, coefficient and residual interpretation.
 - Coefficients are associations on the log-price scale. They are not causal effects.
 
 ## Pricing flags
 
 A listing is a review candidate when actual price differs from predicted price by at least 20% of predicted price. This threshold is a screening convention, not a guarantee of value. Inspection, local comparables, trim details, title/service history, taxes, reconditioning cost, and market liquidity remain necessary.
+
+
+## Expanded EDA and business checks
+
+- Q6 compares price across both nominal text categories and binary indicators such as damage, ownership, turbo, safety, and convenience flags.
+- Q15 computes age-related value-retention slopes separately for supported brand, model, fuel-type, and drivetrain segments when each segment has enough observations.
+- Segment-retention estimates are descriptive associations and can still be influenced by trim mix, condition, selection effects, and omitted variables.
+
+## Validation scope
+
+The workflow validation checks that required generated artifacts exist and are non-empty. Analytical correctness is additionally protected by deterministic tests for binary categorical summaries, multicollinearity diagnostics, Ridge coefficient-path generation, multi-segment retention, and under/overpricing flag direction.
