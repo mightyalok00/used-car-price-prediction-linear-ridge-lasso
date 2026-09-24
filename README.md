@@ -52,6 +52,20 @@ An end-to-end machine-learning portfolio project for **used-car valuation** usin
 
 > Ridge has the lowest external-test RMSE. The difference from Linear Regression is small, so this is a narrow performance edge rather than a large practical gap.
 
+## Model-quality visuals
+
+### External-test RMSE comparison
+
+![External-test RMSE comparison](docs/assets/model_comparison.svg)
+
+Linear and Ridge are effectively tied on the external holdout; Ridge is lower by less than one dollar of RMSE, while Lasso trades a small amount of accuracy for a substantially sparser coefficient set.
+
+### Ridge regularization path
+
+![Ridge coefficient shrinkage](docs/assets/ridge_shrinkage.svg)
+
+As alpha increases, the Ridge coefficient norms shrink monotonically while all 630 encoded coefficients remain active, which is the expected L2-regularization behavior.
+
 ## EDA highlights
 
 ### Price distribution and log transformation
