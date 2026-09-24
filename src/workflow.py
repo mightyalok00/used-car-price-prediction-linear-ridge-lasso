@@ -14,7 +14,6 @@ import numpy as np
 import pandas as pd
 import sklearn
 from sklearn.linear_model import Lasso, LinearRegression, Ridge
-from sklearn.model_selection import KFold
 
 from .config import ProjectConfig
 from .data import align_feature_columns, classify_features, clean_dataset, inspect_dataset, load_csv, schema_table
@@ -23,6 +22,7 @@ from .modeling import (
     coefficient_table,
     fit_and_evaluate,
     make_pipeline,
+    make_price_stratified_cv,
     numeric_multicollinearity_diagnostics,
     residual_diagnostics,
     ridge_coefficient_path,
@@ -121,7 +121,10 @@ def run_analysis(config: ProjectConfig) -> dict[str, Any]:
     save_json(multicollinearity_summary, config.reports_dir / "multicollinearity_summary.json")
 
     preprocessor = build_preprocessor(model_groups, config.one_hot_min_frequency)
-    cv = KFold(n_splits=config.cv_folds, shuffle=True, random_state=config.random_state)
+    cv, cv_fold_balance = make_price_stratified_cv(
+        y_train, config.cv_folds, config.random_state
+    )
+    _write_csv(cv_fold_balance, config.tables_dir / "cv_fold_price_balance.csv")
     linear_template = make_pipeline(preprocessor, LinearRegression(n_jobs=config.n_jobs))
     ridge_template = make_pipeline(preprocessor, Ridge(solver="lsqr"))
     lasso_template = make_pipeline(
@@ -213,6 +216,7 @@ def run_analysis(config: ProjectConfig) -> dict[str, Any]:
         "test_path": str(config.test_path),
         "target": config.target,
         "cv_folds": config.cv_folds,
+        "cv_strategy": "StratifiedKFold on quantile-binned training price",
         "random_state": config.random_state,
         "best_external_test_model": best_model_name,
         "raw_dimensions": dimensions.to_dict("records"),
@@ -226,6 +230,7 @@ def run_analysis(config: ProjectConfig) -> dict[str, Any]:
         config.tables_dir / "pricing_opportunities_all_test_rows.csv",
         config.tables_dir / "numeric_multicollinearity_vif.csv",
         config.tables_dir / "ridge_coefficient_path.csv",
+        config.tables_dir / "cv_fold_price_balance.csv",
         config.reports_dir / "analysis_summary.md",
         config.reports_dir / "run_metadata.json",
     ]
@@ -258,6 +263,7 @@ def run_analysis(config: ProjectConfig) -> dict[str, Any]:
         "multicollinearity_summary": multicollinearity_summary,
         "ridge_search": ridge_search,
         "ridge_coefficient_path": ridge_path,
+        "cv_fold_price_balance": cv_fold_balance,
         "lasso_search": lasso_search,
         "comparison": comparison,
         "residual_diagnostics": linear_residuals,
