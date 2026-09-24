@@ -16,7 +16,8 @@
 [Questions](docs/questions.md) •
 [Methodology](docs/methodology.md) •
 [Results](outputs/reports/analysis_summary.md) •
-[Tests](tests/test_data.py)
+[Tests](tests/test_data.py) •
+[Changelog](CHANGELOG.md)
 
 </div>
 
@@ -31,6 +32,8 @@ This project compares **Multiple Linear Regression, Ridge Regression, and Lasso 
 - **Three regression approaches compared** on the same holdout and five-fold cross-validation strategy.
 - **Real model diagnostics** including residual behavior, VIF-style multicollinearity checks, and Ridge coefficient shrinkage.
 - **Business-ready outputs** for valuation, depreciation, inventory selection, and pricing review.
+- **Robust evaluation** reports MedianAE alongside RMSE so typical error is visible even when luxury-car outliers inflate squared-error metrics.
+- **Local-first scope:** intentionally reproducible without a deployment layer.
 - **Automated GitHub Actions tests** protect the core analysis logic.
 
 ## 📊 Portfolio snapshot
@@ -168,6 +171,7 @@ Cleaning removes 34 train rows and 10 test rows with unusable target values. Pre
 
     used-car-price-prediction-linear-ridge-lasso/
     ├── README.md
+    ├── CHANGELOG.md
     ├── requirements.txt
     ├── .github/
     │   └── workflows/
@@ -297,6 +301,14 @@ This project is designed as a **Data Science / Machine Learning portfolio projec
 - **License:** MIT
 - **Best external-test model:** Ridge Regression
 - **Best external-test RMSE:** approximately 13,942
+
+## 📦 Project status
+
+This repository is intentionally maintained as a **local, reproducible portfolio project** rather than a deployed application. The modeling workflow, tests, generated outputs, documentation, and business analysis are the finished deliverables.
+
+The repository is **v1.0.0-ready**. See [CHANGELOG.md](CHANGELOG.md) for the consolidated project history and final scope.
+
+> The MedianAE code and tests are committed. Run `python scripts/run_analysis.py` once more with the local source CSVs to regenerate the committed model tables and analysis summary with the new MedianAE column.
 
 ## 📄 License
 
