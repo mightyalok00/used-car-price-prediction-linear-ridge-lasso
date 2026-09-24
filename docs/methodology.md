@@ -49,6 +49,7 @@ The source train file is used for training and cross-validation. The source test
 - A generated `cv_fold_price_balance.csv` table records fold-level price mean, median, standard deviation, minimum, and maximum so CV stability can be audited directly.
 - Model fitting defaults to one process for reliable execution on Windows; this changes runtime, not results.
 - Alpha tuning uses `GridSearchCV` with a custom scorer that converts log-target predictions back to original price units, so alpha selection and final CV comparison both optimize RMSE in dollars.
+- Evaluation reports MAE, **Median absolute error (MedianAE)**, RMSE, MSE, and R². MedianAE is included as a robust companion to RMSE because a small number of ultra-expensive vehicles can create very large squared errors.
 - Ridge coefficient magnitude is also summarized across every candidate alpha so shrinkage is measured, not merely described.
 - Numeric multicollinearity is measured with VIF-style diagnostics and a condition number. These diagnostics supplement, rather than replace, coefficient and residual interpretation.
 - Coefficients are associations on the log-price scale. They are not causal effects.
@@ -67,3 +68,13 @@ A listing is a review candidate when actual price differs from predicted price b
 ## Validation scope
 
 The workflow validation checks that required generated artifacts exist and are non-empty. Analytical correctness is additionally protected by deterministic tests for binary categorical summaries, multicollinearity diagnostics, Ridge coefficient-path generation, multi-segment retention, under/overpricing flag direction, and the configured five-fold CV default and target-price-stratified fold construction.
+
+
+## Limitations and future work
+
+- The dataset contains a small number of ultra-expensive vehicles. Even after price-stratified CV, these observations can materially increase RMSE in folds that contain them.
+- The external test set appears easier than the training CV folds. Holdout and CV metrics should therefore be interpreted together rather than treating one split as definitive.
+- The feature set does not fully capture trim, geography, service history, title history, seller type, reconditioning cost, negotiation, or local demand.
+- Pricing opportunity flags are screening aids, not causal or transactional recommendations.
+- The current models produce point estimates only. A future extension could add calibrated prediction intervals or conformal prediction so users can see uncertainty ranges around estimated prices.
+- Future model comparisons could include robust or nonlinear baselines, but only if they preserve the project's leakage-safe and interpretable evaluation design.
