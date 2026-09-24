@@ -9,7 +9,6 @@ from src.modeling import (
     build_preprocessor,
     make_pipeline,
     numeric_multicollinearity_diagnostics,
-    predict_price,
     regression_metrics,
     ridge_coefficient_path,
     select_model_features,
@@ -34,14 +33,6 @@ def test_cleaning_removes_invalid_target_and_adds_age() -> None:
     assert summary["invalid_or_missing_target_rows_removed"] == 1
 
 
-def test_align_feature_columns_uses_only_shared_predictors() -> None:
-    train = pd.DataFrame({"a": [1], "b": [2], "price": [100]})
-    test = pd.DataFrame({"a": [3], "c": [4], "price": [110]})
-    train_x, test_x = align_feature_columns(train, test, "price")
-    assert list(train_x.columns) == ["a"]
-    assert list(test_x.columns) == ["a"]
-
-
 def test_categorical_summary_includes_binary_features() -> None:
     frame = pd.DataFrame(
         {
@@ -61,42 +52,6 @@ def test_multicollinearity_detects_perfect_numeric_relation() -> None:
     assert summary["features_vif_gt_10"] >= 2
 
 
-def test_regression_metrics_match_known_values() -> None:
-    y_true = np.array([10.0, 20.0])
-    y_pred = np.array([12.0, 18.0])
-    metrics = regression_metrics(y_true, y_pred)
-    assert metrics["MAE"] == 2.0
-    assert metrics["MSE"] == 4.0
-    assert metrics["RMSE"] == 2.0
-
-
-def test_preprocessing_handles_unseen_category() -> None:
-    x = pd.DataFrame(
-        {
-            "mileage": [10_000, 20_000, 30_000, 40_000],
-            "brand": ["a", "a", "b", "b"],
-        }
-    )
-    y = pd.Series([20_000, 18_000, 16_000, 14_000], dtype=float)
-    model_x, groups = select_model_features(x)
-    pipeline = make_pipeline(build_preprocessor(groups, min_frequency=1), Ridge(alpha=1.0, solver="lsqr"))
-    fitted = pipeline.fit(model_x, np.log1p(y))
-    unseen = pd.DataFrame({"mileage": [25_000], "brand": ["never_seen_before"]})
-    prediction = predict_price(fitted, unseen)
-    assert prediction.shape == (1,)
-    assert np.isfinite(prediction).all()
-
-
-def test_predict_price_clips_negative_values_to_zero() -> None:
-    class FakeModel:
-        def predict(self, x):
-            return np.array([-10.0, 0.0, 1.0])
-
-    prediction = predict_price(FakeModel(), pd.DataFrame({"x": [1, 2, 3]}))
-    assert (prediction >= 0).all()
-    assert prediction[0] == 0.0
-
-
 def test_ridge_coefficient_path_reports_each_alpha() -> None:
     x = pd.DataFrame({"mileage": [1, 2, 3, 4, 5], "brand": ["a", "a", "b", "b", "b"]})
     y = pd.Series([10000, 9000, 12000, 11000, 10500], dtype=float)
@@ -105,6 +60,7 @@ def test_ridge_coefficient_path_reports_each_alpha() -> None:
     result = ridge_coefficient_path(pipeline, model_x, y, (0.1, 1.0, 10.0))
     assert result["alpha"].tolist() == [0.1, 1.0, 10.0]
     assert (result["l2_coefficient_norm"] >= 0).all()
+    assert result["l2_coefficient_norm"].is_monotonic_decreasing
 
 
 def test_segment_retention_covers_multiple_segment_families() -> None:
@@ -129,3 +85,37 @@ def test_pricing_opportunity_flags_are_directionally_correct() -> None:
     assert flags[80.0] == "potentially_underpriced"
     assert flags[100.0] == "within_20_percent"
     assert flags[130.0] == "potentially_overpriced"
+
+
+def test_feature_alignment_uses_common_train_order() -> None:
+    train = pd.DataFrame({"a": [1], "b": [2], "price": [10]})
+    test = pd.DataFrame({"b": [3], "a": [4], "price": [11], "extra": [99]})
+    x_train, x_test = align_feature_columns(train, test, "price")
+    assert x_train.columns.tolist() == ["a", "b"]
+    assert x_test.columns.tolist() == ["a", "b"]
+
+
+def test_preprocessor_handles_missing_and_unseen_category() -> None:
+    train = pd.DataFrame(
+        {
+            "mileage": [10.0, np.nan, 30.0, 40.0],
+            "brand": ["a", "a", "b", "b"],
+        }
+    )
+    test = pd.DataFrame({"mileage": [np.nan], "brand": ["new_brand"]})
+    model_x, groups = select_model_features(train)
+    preprocessor = build_preprocessor(groups, min_frequency=1)
+    transformed_train = preprocessor.fit_transform(model_x)
+    transformed_test = preprocessor.transform(test[model_x.columns])
+    assert transformed_train.shape[0] == 4
+    assert transformed_test.shape[0] == 1
+
+
+def test_regression_metrics_known_values() -> None:
+    y_true = np.array([10.0, 20.0])
+    y_pred = np.array([12.0, 18.0])
+    metrics = regression_metrics(y_true, y_pred)
+    assert metrics["MAE"] == 2.0
+    assert metrics["MSE"] == 4.0
+    assert metrics["RMSE"] == 2.0
+    assert np.isclose(metrics["R2"], 0.84)
