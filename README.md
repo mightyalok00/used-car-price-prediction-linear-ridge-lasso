@@ -293,7 +293,7 @@ This project is designed as a **Data Science / Machine Learning portfolio projec
 
 - **CV stability improved:** Ridge CV RMSE standard deviation decreased from ~12,325 to ~8,660 after price-stratified fold construction (~30% reduction).
 
-- **Cross-validation:** 5-fold shuffled CV with `random_state=42`
+- **Cross-validation:** 5-fold shuffled, price-stratified CV with `random_state=42`
 - **Latest workflow status:** passing on GitHub Actions
 - **Validation report:** PASS
 - **Assignment coverage:** 16 / 16 questions
