@@ -135,15 +135,16 @@ display(Image(filename=str(PROJECT_ROOT / "outputs/figures/numeric_features_vs_p
         """
 ## Q6. Categorical Features vs Price
 
-For each available text category, compare count, mean price, and median price. The saved table includes the most frequent levels so sparse categories do not dominate the presentation.
+Compare mean and median price across both text categories and binary vehicle characteristics. This includes brand/model/fuel/transmission/drivetrain as well as indicators such as damage history, ownership, turbo, safety, and convenience features when available.
 """
     ),
     code(
         """
 cat_summary = results["categorical_summary"]
-for feature in [c for c in ["brand", "model", "fuel_type", "transmission", "drivetrain"] if c in cat_summary["feature"].unique()]:
+priority = ["brand", "model", "fuel_type", "transmission", "drivetrain", "damaged", "first_owner", "turbo"]
+for feature in [c for c in priority if c in cat_summary["feature"].unique()]:
     display(Markdown(f"### {feature}"))
-    display(cat_summary[cat_summary["feature"] == feature].sort_values("median_price", ascending=False).head(10))
+    display(cat_summary[cat_summary["feature"] == feature].sort_values("median_price", ascending=False).head(15))
 """
     ),
     md(
@@ -166,7 +167,7 @@ MAE is average absolute dollar error. MSE squares errors and heavily weights lar
         """
 ## Q9. Linear Regression Interpretation and Diagnostics
 
-Coefficients are on the standardized/encoded feature space and log-price target. Positive values raise predicted log-price; negative values lower it, holding other encoded inputs fixed. Large residual skew or a strong fitted-vs-absolute-residual correlation warns that assumptions are imperfect. Correlated vehicle descriptors can make individual baseline coefficients unstable; Ridge is designed to reduce that instability.
+Coefficients are on the standardized/encoded feature space and log-price target. Positive values raise predicted log-price; negative values lower it, holding other encoded inputs fixed. Residual skew and fitted-vs-absolute-residual correlation assess residual behavior and heteroscedasticity. Multicollinearity is measured explicitly with VIF-style diagnostics and a numeric condition number rather than only discussed conceptually.
 """
     ),
     code(
@@ -175,6 +176,8 @@ linear_coef = pd.read_csv(PROJECT_ROOT / "outputs/tables/linear_regression_coeff
 display(linear_coef.head(15))
 display(linear_coef.sort_values("coefficient_log_price").head(15))
 display(results["residual_diagnostics"])
+display(results["multicollinearity_summary"])
+display(results["multicollinearity_vif"].head(20))
 display(Image(filename=str(PROJECT_ROOT / "outputs/figures/linear_regression_residuals.png")))
 """
     ),
@@ -182,7 +185,7 @@ display(Image(filename=str(PROJECT_ROOT / "outputs/figures/linear_regression_res
         """
 ## Q10. Ridge Regression and Alpha Tuning
 
-GridSearchCV uses the same seeded folds and chooses alpha by validation RMSE on the log target. Ridge shrinks correlated coefficients but normally retains them all.
+GridSearchCV uses the same seeded folds to select alpha. In addition to CV error, the project now records the Ridge coefficient path across candidate alpha values, showing how stronger L2 regularization changes coefficient magnitude and model complexity.
 """
     ),
     code("display(results['ridge_search'])\ndisplay(results['comparison'].query(\"Model == 'Ridge Regression'\"))"),
@@ -236,7 +239,7 @@ display(best_coef.head(20))
         """
 ## Q15. Business Analysis — Depreciation and Inventory Strategy
 
-Age bands summarize price decay. Segment slopes estimate the association between one additional year of age and log price for sufficiently represented segments. Better apparent retention can still reflect trim mix, condition, or selection effects.
+Age bands summarize price decay. Retention slopes are calculated separately for every supported segment family—brand, model, fuel type, and drivetrain—when enough listings are available. Better apparent retention can still reflect trim mix, condition, or selection effects.
 """
     ),
     code("display(results['depreciation'])\ndisplay(results['retention'].head(20))"),
