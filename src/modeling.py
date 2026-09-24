@@ -164,6 +164,73 @@ def coefficient_table(fitted: Pipeline) -> pd.DataFrame:
     return table.sort_values("absolute_coefficient", ascending=False).reset_index(drop=True)
 
 
+
+def numeric_multicollinearity_diagnostics(X: pd.DataFrame) -> tuple[pd.DataFrame, dict[str, float]]:
+    """Compute VIF-style diagnostics for numeric predictors without extra dependencies.
+
+    Missing values are median-filled for this diagnostic only. Binary indicators are
+    included because they can also be linearly redundant with other numeric fields.
+    """
+    numeric = X.select_dtypes(include=np.number).copy()
+    if numeric.empty:
+        return pd.DataFrame(columns=["feature", "vif"]), {"condition_number": float("nan"), "n_numeric_features": 0}
+
+    numeric = numeric.loc[:, numeric.nunique(dropna=True) > 1]
+    if numeric.empty:
+        return pd.DataFrame(columns=["feature", "vif"]), {"condition_number": float("nan"), "n_numeric_features": 0}
+
+    filled = numeric.fillna(numeric.median(numeric_only=True))
+    scaled = (filled - filled.mean()) / filled.std(ddof=0).replace(0, 1)
+    matrix = scaled.to_numpy(dtype=float)
+    condition_number = float(np.linalg.cond(matrix))
+
+    rows = []
+    for col in scaled.columns:
+        y = scaled[col].to_numpy(dtype=float)
+        other_cols = [c for c in scaled.columns if c != col]
+        if not other_cols:
+            vif = 1.0
+        else:
+            x_other = scaled[other_cols].to_numpy(dtype=float)
+            r2 = LinearRegression().fit(x_other, y).score(x_other, y)
+            vif = float("inf") if r2 >= 0.999999 else float(1.0 / (1.0 - r2))
+        rows.append({"feature": col, "vif": vif})
+
+    table = pd.DataFrame(rows).sort_values("vif", ascending=False).reset_index(drop=True)
+    summary = {
+        "condition_number": condition_number,
+        "n_numeric_features": int(len(scaled.columns)),
+        "features_vif_gt_5": int((table["vif"] > 5).sum()),
+        "features_vif_gt_10": int((table["vif"] > 10).sum()),
+    }
+    return table, summary
+
+
+def ridge_coefficient_path(
+    pipeline: Pipeline,
+    X: pd.DataFrame,
+    y: pd.Series,
+    alphas: tuple[float, ...],
+) -> pd.DataFrame:
+    """Fit Ridge at each alpha and summarize coefficient shrinkage."""
+    rows = []
+    y_log = np.log1p(np.asarray(y))
+    for alpha in alphas:
+        candidate = clone(pipeline)
+        candidate.set_params(model__alpha=float(alpha))
+        fitted = candidate.fit(X, y_log)
+        coef = np.asarray(fitted.named_steps["model"].coef_).ravel()
+        rows.append(
+            {
+                "alpha": float(alpha),
+                "l1_coefficient_norm": float(np.abs(coef).sum()),
+                "l2_coefficient_norm": float(np.sqrt(np.square(coef).sum())),
+                "max_absolute_coefficient": float(np.abs(coef).max()) if coef.size else 0.0,
+                "active_features": int(np.sum(np.abs(coef) > 1e-10)),
+            }
+        )
+    return pd.DataFrame(rows).sort_values("alpha").reset_index(drop=True)
+
 def residual_diagnostics(y_true: pd.Series, predictions: np.ndarray) -> dict[str, float]:
     residuals = np.asarray(y_true) - predictions
     return {
