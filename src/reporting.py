@@ -82,7 +82,7 @@ def categorical_price_summary(df: pd.DataFrame, target: str, max_levels: int = 1
             candidates.append(col)
 
     for col in candidates:
-        series = df[col].fillna("unknown")
+        series = df[col].astype(object).where(df[col].notna(), "unknown")
         top = series.value_counts().head(max_levels).index
         part = (
             df.assign(_category=series)
