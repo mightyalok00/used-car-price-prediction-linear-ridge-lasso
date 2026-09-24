@@ -308,8 +308,6 @@ This repository is intentionally maintained as a **local, reproducible portfolio
 
 The repository is **v1.0.0-ready**. See [CHANGELOG.md](CHANGELOG.md) for the consolidated project history and final scope.
 
-> The MedianAE code and tests are committed. Run `python scripts/run_analysis.py` once more with the local source CSVs to regenerate the committed model tables and analysis summary with the new MedianAE column.
-
 ## 📄 License
 
 The source code and project documentation are released under the [MIT License](LICENSE).
