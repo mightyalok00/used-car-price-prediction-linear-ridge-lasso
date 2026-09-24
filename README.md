@@ -31,7 +31,7 @@ An end-to-end machine-learning portfolio project for **used-car valuation** usin
 - Q15 now evaluates age-related value retention across supported **brand, model, fuel type, and drivetrain** segments when sample size is sufficient.
 - Deterministic pytest checks cover these corrected analytical behaviors, and GitHub Actions runs them automatically on every push and pull request.
 
-> The committed historical output tables were generated before this correctness upgrade. Re-run `python scripts/run_analysis.py` with the source CSVs to regenerate the new VIF, Ridge-path, expanded categorical, and multi-segment retention outputs.
+> The corrected workflow has been rerun on the source datasets, and the committed outputs now include the regenerated VIF diagnostics, Ridge coefficient path, expanded categorical analysis, and multi-segment retention results.
 
 ## Key findings & business impact
 
@@ -110,7 +110,7 @@ The committed results were produced with the environment recorded in [outputs/re
 - [x] Leakage-safe preprocessing fitted only on training folds
 - [x] External labeled test set kept separate from training
 - [x] Generated tables, figures, diagnostics, and summaries committed
-- [x] Lightweight tests included
+- [x] Deterministic correctness tests included and run in GitHub Actions
 - [x] Command-line workflow included
 
 ## Verified source dimensions
@@ -122,9 +122,12 @@ Cleaning removes 34 train rows and 10 test rows with unusable target values. Pre
 
 ## Project structure
 
-    Used_Car_Price_Prediction_Project/
+    used-car-price-prediction-linear-ridge-lasso/
     ├── README.md
     ├── requirements.txt
+    ├── .github/
+    │   └── workflows/
+    │       └── tests.yml
     ├── data/raw/README.md
     ├── docs/
     │   ├── questions.md
@@ -145,7 +148,6 @@ Cleaning removes 34 train rows and 10 test rows with unusable target values. Pre
     └── outputs/
         ├── figures/
         ├── tables/
-        ├── models/
         └── reports/
 
 ## Run the project
