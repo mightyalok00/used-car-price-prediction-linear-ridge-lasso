@@ -4,6 +4,7 @@
 ![scikit-learn](https://img.shields.io/badge/scikit--learn-1.9.0-orange)
 ![Status](https://img.shields.io/badge/status-complete-brightgreen)
 ![Questions](https://img.shields.io/badge/questions-16%2F16-success)
+![Tests](https://github.com/mightyalok00/used-car-price-prediction-linear-ridge-lasso/actions/workflows/tests.yml/badge.svg)
 
 An end-to-end machine-learning portfolio project for **used-car valuation** using Multiple Linear Regression, Ridge Regression, and Lasso Regression. The project combines schema-aware cleaning, leakage-safe preprocessing, cross-validation, model diagnostics, and dealership-focused business analysis.
 
@@ -21,6 +22,16 @@ An end-to-end machine-learning portfolio project for **used-car valuation** usin
 | Potentially underpriced listings | **565** |
 | Potentially overpriced listings | **693** |
 | Assignment coverage | **16 / 16 questions answered** |
+
+## Correctness upgrades
+
+- Q6 now compares both nominal categories and binary indicators such as damage/ownership/equipment flags against mean and median price.
+- Q9 now measures numeric multicollinearity with VIF-style diagnostics and a condition number instead of only discussing it.
+- Q10 now records Ridge coefficient shrinkage across every candidate alpha and tunes regularized models using RMSE in original price units.
+- Q15 now evaluates age-related value retention across supported **brand, model, fuel type, and drivetrain** segments when sample size is sufficient.
+- Deterministic pytest checks cover these corrected analytical behaviors, and GitHub Actions runs them automatically on every push and pull request.
+
+> The committed historical output tables were generated before this correctness upgrade. Re-run `python scripts/run_analysis.py` with the source CSVs to regenerate the new VIF, Ridge-path, expanded categorical, and multi-segment retention outputs.
 
 ## Key findings & business impact
 
